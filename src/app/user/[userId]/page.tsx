@@ -11,7 +11,7 @@ export default async function UserPage({ params }: { params: Params }) {
   console.log(user);
   if (user) {
     return (
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center bg-amber-50 sm:w-8/12 mx-auto p-6 rounded-lg shadow-sm sm:my-8">
         <div className=" flex flex-row gap-6 justify-center mt-6">
           <div>
             <Image
@@ -22,8 +22,8 @@ export default async function UserPage({ params }: { params: Params }) {
               alt="user photo"
             />
           </div>
-          <div className="flex flex-col justify-center items-start">
-            <h2 className="text-2xl font-bold">{user.name}</h2>
+          <div className="flex flex-col justify-center items-start gap-1">
+            <h2 className="text-2xl font-bold mb-1">{user.name}</h2>
             <p className="text-md">Fullstack Engineer</p>
             <p className="text-sm text-gray-500">Berlin, Germany</p>
           </div>
