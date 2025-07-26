@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { getUser } from "@/actions/users";
 import { RadarChartRounded } from "@/components/radar-chart";
+import UserInfo from "@/components/user-info";
 
 type Params = Promise<{ userId: string }>;
 
@@ -11,22 +12,18 @@ export default async function UserPage({ params }: { params: Params }) {
   console.log(user);
   if (user) {
     return (
-      <div className="flex flex-col items-center bg-amber-50 sm:w-8/12 mx-auto p-6 rounded-lg shadow-sm sm:my-8">
+      <div className="flex flex-col items-center bg-amber-50 sm:w-8/12 mx-auto sm:p-6 rounded-lg shadow-sm sm:my-8">
         <div className=" flex flex-row gap-6 justify-center mt-6">
           <div>
             <Image
-              className="border-2 border-stone-500 rounded-full"
+              className="border-1 border-stone-500 rounded-full"
               src={user.image as string}
               width={120}
               height={120}
               alt="user photo"
             />
           </div>
-          <div className="flex flex-col justify-center items-start gap-1">
-            <h2 className="text-2xl font-bold mb-1">{user.name}</h2>
-            <p className="text-md">Fullstack Engineer</p>
-            <p className="text-sm text-gray-500">Berlin, Germany</p>
-          </div>
+          <UserInfo name={user.name || "No Name"} location="Berlin" occupation="Sr. Meme Distributor" />
         </div>
         <div className="w-full max-w-2xl mt-10">
           <RadarChartRounded />
@@ -34,5 +31,9 @@ export default async function UserPage({ params }: { params: Params }) {
       </div>
     );
   }
-  return <div>User Not Found</div>;
+  return (
+    <div>
+      <h1 className="text-3xl font-bold text-center m-8">User Not Found</h1>
+    </div>
+  );
 }

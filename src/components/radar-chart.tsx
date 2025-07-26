@@ -48,9 +48,7 @@ export function RadarChartRounded() {
                   fill="none"
                   strokeOpacity={1}
                   className={
-                    i % 2 === 0
-                      ? "stroke-gray-100 dark:stroke-zinc-800"
-                      : "stroke-gray-50 dark:stroke-zinc-900"
+                    i % 2 === 0 ? "stroke-gray-100 " : "stroke-gray-50 "
                   }
                   strokeWidth={radius / 5}
                 />
@@ -111,7 +109,7 @@ export function RadarChartRounded() {
                 dy="0.35em" // Center the text vertically
                 textAnchor="middle"
                 // fontSize="10px"
-                className="fill-gray-600 dark:fill-gray-300 text-xs"
+                className="fill-gray-600 text-xs"
               >
                 {d.value}
               </text>
@@ -135,7 +133,7 @@ export function RadarChartRounded() {
                 y={angle > 90 && angle < 270 ? y + 20 : y - 15}
                 textAnchor="middle"
                 // fontSize="14px"
-                className="fill-gray-700 dark:fill-gray-200"
+                className="fill-gray-700 "
                 transform={`rotate(${adjustedAngle}, ${x}, ${y})`}
               >
                 {d.topic}
