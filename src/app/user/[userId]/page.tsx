@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { getUser } from "@/actions/users";
+import { RadarChartRounded } from "@/components/radar-chart";
 
 type Params = Promise<{ userId: string }>;
 
@@ -27,7 +28,9 @@ export default async function UserPage({ params }: { params: Params }) {
             <p className="text-sm text-gray-500">Berlin, Germany</p>
           </div>
         </div>
-        <div>GRAPH GOES HERE</div>
+        <div className="w-full max-w-2xl mt-10">
+          <RadarChartRounded />
+        </div>
       </div>
     );
   }
