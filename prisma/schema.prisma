@@ -109,8 +109,8 @@ model Skill {
   id           String        @id @default(uuid())
   name         String        @unique
   description  String?
-  industryId   String?
-  industry     Industry?     @relation(fields: [industryId], references: [id], onDelete: SetNull)
+  industryId   String
+  industry     Industry      @relation(fields: [industryId], references: [id], onDelete: Cascade)
   endorsements Endorsement[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
