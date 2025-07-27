@@ -22,6 +22,8 @@ model User {
   lastName             String?
   email                String?       @unique
   emailVerified        DateTime?
+  location             String?
+  title                String?
   image                String?
   linkedInId           String?       @unique
   industryId           String?

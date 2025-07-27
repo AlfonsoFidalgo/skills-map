@@ -23,7 +23,7 @@ export default async function UserPage({ params }: { params: Params }) {
               alt="user photo"
             />
           </div>
-          <UserInfo name={user.name || "No Name"} location="Berlin" occupation="Sr. Meme Distributor" />
+          <UserInfo name={user.name || ""} location="Berlin" occupation="Sr. Meme Distributor" />
         </div>
         <div className="w-full max-w-2xl mt-10">
           <RadarChartRounded />
