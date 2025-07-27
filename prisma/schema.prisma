@@ -16,18 +16,24 @@ datasource db {
 
 // User model for storing LinkedIn user data
 model User {
-  id            String    @id @default(uuid())
-  name          String?
-  firstName     String?
-  lastName      String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  linkedInId    String?   @unique
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  accounts      Account[]
-  sessions      Session[]
+  id                   String        @id @default(uuid())
+  name                 String?
+  firstName            String?
+  lastName             String?
+  email                String?       @unique
+  emailVerified        DateTime?
+  image                String?
+  linkedInId           String?       @unique
+  industryId           String?
+  industry             Industry?     @relation(fields: [industryId], references: [id], onDelete: SetNull)
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  accounts             Account[]
+  sessions             Session[]
+  givenEndorsements    Endorsement[] @relation("EndorserUser")
+  receivedEndorsements Endorsement[] @relation("EndorseeUser")
+
+  @@index([industryId])
 }
 
 // Account model for storing OAuth provider details
@@ -70,4 +76,44 @@ model VerificationToken {
   updatedAt  DateTime @updatedAt
 
   @@unique([identifier, token])
+}
+
+model Industry {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  users       User[]
+  skills      Skill[]
+}
+
+model Endorsement {
+  id         String   @id @default(uuid())
+  endorseeId String
+  endorsee   User     @relation("EndorseeUser", fields: [endorseeId], references: [id], onDelete: Cascade)
+  skillId    String
+  skill      Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  endorserId String
+  endorser   User     @relation("EndorserUser", fields: [endorserId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([endorseeId, skillId, endorserId])
+  @@index([endorseeId])
+  @@index([endorserId])
+  @@index([skillId])
+}
+
+model Skill {
+  id           String        @id @default(uuid())
+  name         String        @unique
+  description  String?
+  industryId   String?
+  industry     Industry?     @relation(fields: [industryId], references: [id], onDelete: SetNull)
+  endorsements Endorsement[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([industryId])
 }
