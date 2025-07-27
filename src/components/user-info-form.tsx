@@ -8,12 +8,14 @@ type UserInfoFormProps = {
   location?: string;
   userId?: string;
   title?: string;
+  industry?: string | null;
   setIsEditing: (isEditing: boolean) => void;
 };
 
 export default function UserInfoForm({
   location,
   userId,
+  industry,
   title,
   setIsEditing,
 }: UserInfoFormProps) {
@@ -41,6 +43,12 @@ export default function UserInfoForm({
           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-md"
           placeholder="Enter your job title"
         />
+      </div>
+      <div>
+        <select name="industry" defaultValue={industry || ""}>
+          <option value="tech">Tech</option>
+          <option value="marketing">Marketing</option>
+        </select>
       </div>
       <div>
         <input

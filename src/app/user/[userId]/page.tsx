@@ -3,12 +3,16 @@ import Image from "next/image";
 import { getUser } from "@/actions/users";
 import { RadarChartRounded } from "@/components/radar-chart";
 import UserInfo from "@/components/user-info";
+import { getIndustryDetails } from "@/actions/industries";
 
 type Params = Promise<{ userId: string }>;
 
 export default async function UserPage({ params }: { params: Params }) {
   const { userId } = await params;
   const user = await getUser(userId);
+  const industry = user?.industryId
+    ? await getIndustryDetails(user.industryId)
+    : null;
 
   if (user) {
     return (
@@ -28,6 +32,7 @@ export default async function UserPage({ params }: { params: Params }) {
             name={user.name || ""}
             location={user.location || ""}
             title={user.title || ""}
+            industry={industry?.name}
           />
         </div>
         <div className="w-full max-w-2xl mt-10">

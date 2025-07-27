@@ -10,12 +10,14 @@ type UserInfoProps = {
   name: string;
   location?: string;
   title?: string;
+  industry?: string | null;
 };
 
 export default function UserInfo({
   userId,
   name,
   location,
+  industry,
   title,
 }: UserInfoProps) {
   const { data: session } = useSession();
@@ -35,6 +37,7 @@ export default function UserInfo({
       {!isEditing ? (
         <>
           {title && <p className="text-md">{title}</p>}
+          {industry && <p className="text-md">{industry}</p>}
           {location && <p className="text-sm text-gray-500">{location}</p>}
         </>
       ) : (
@@ -42,6 +45,7 @@ export default function UserInfo({
           userId={userId}
           location={location}
           title={title}
+          industry={industry}
           setIsEditing={setIsEditing}
         />
       )}

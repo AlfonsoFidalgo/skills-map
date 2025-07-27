@@ -3,12 +3,14 @@
 import prisma from "@/db";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
+import { INDUSTRIES } from "@/utils/constants";
 
 type User = {
   name: string | null;
   id: string;
   title: string | null;
   location: string | null;
+  industryId: string | null;
   email: string | null;
   emailVerified: Date | null;
   image: string | null;
@@ -68,6 +70,8 @@ export async function editUserInfo(
       success: false,
     };
   }
+  const industry = formData.get("industry") as keyof typeof INDUSTRIES;
+  const industryId = INDUSTRIES[industry];
   const title = formData.get("title") as string;
   const location = formData.get("location") as string;
 
@@ -78,7 +82,7 @@ export async function editUserInfo(
     };
   }
 
-  const user = await editUser(id, { title, location });
+  const user = await editUser(id, { title, location, industryId });
 
   if (!user) {
     return {
