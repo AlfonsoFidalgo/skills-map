@@ -26,8 +26,8 @@ export default async function UserPage({ params }: { params: Params }) {
           <UserInfo
             userId={user.id}
             name={user.name || ""}
-            location="Berlin"
-            occupation="Sr. Meme Distributor"
+            location={user.location || ""}
+            title={user.title || ""}
           />
         </div>
         <div className="w-full max-w-2xl mt-10">
