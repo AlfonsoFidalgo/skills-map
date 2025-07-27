@@ -1,21 +1,22 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import { signIn, signOut } from "@/actions/auth";
 import { navigateTo } from "@/actions/navigation";
-import Spinner from "@/components/UI/spinner";
+import { type Session } from "@/types/session";
 
-export default function HomepageAuth() {
-  const session = useSession();
+type HomepageAuthProps = {
+  session: Session | null;
+};
+
+export default function HomepageAuth({ session }: HomepageAuthProps) {
   let authContent: React.ReactNode;
-  console.log(session);
-  if (session.status === "loading") {
-    authContent = <Spinner />;
-  } else if (session.data?.user?.id) {
+  console.log("session:", session);
+
+  if (session?.user) {
     authContent = (
       <div className="p-4 space-y-3">
         <button
-          onClick={() => navigateTo(`/user/${session.data?.user?.id}`)}
+          onClick={() => navigateTo(`/user/${session.user.id}`)}
           className="w-full bg-gradient-to-r from-green-500 to-teal-600 text-white px-6 py-3 rounded-lg font-medium shadow-lg hover:from-green-600 hover:to-teal-700 hover:shadow-xl transition-all duration-200 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-300"
         >
           View Profile

@@ -9,7 +9,7 @@ type Params = Promise<{ userId: string }>;
 export default async function UserPage({ params }: { params: Params }) {
   const { userId } = await params;
   const user = await getUser(userId);
-  console.log(user);
+
   if (user) {
     return (
       <div className="flex flex-col items-center bg-amber-50 sm:w-8/12 mx-auto sm:p-6 rounded-lg shadow-sm sm:my-8">
@@ -18,12 +18,17 @@ export default async function UserPage({ params }: { params: Params }) {
             <Image
               className="border-1 border-stone-500 rounded-full"
               src={user.image as string}
-              width={120}
-              height={120}
+              width={100}
+              height={100}
               alt="user photo"
             />
           </div>
-          <UserInfo name={user.name || ""} location="Berlin" occupation="Sr. Meme Distributor" />
+          <UserInfo
+            userId={user.id}
+            name={user.name || ""}
+            location="Berlin"
+            occupation="Sr. Meme Distributor"
+          />
         </div>
         <div className="w-full max-w-2xl mt-10">
           <RadarChartRounded />
