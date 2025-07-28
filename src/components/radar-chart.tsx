@@ -90,7 +90,7 @@ export function RadarChartRounded() {
           <path
             d={radarPath ?? ""}
             strokeWidth="1"
-            className="fill-lime-200/70 border-lime-500 stroke-lime-500"
+            className="fill-lime-200/20 border-lime-500 stroke-lime-500"
           />
 
           {/* Draw circles for each data point */}

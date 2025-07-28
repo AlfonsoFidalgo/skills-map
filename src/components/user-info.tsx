@@ -24,30 +24,54 @@ export default function UserInfo({
   const [isEditing, setIsEditing] = React.useState(false);
 
   return (
-    <div className="flex flex-col justify-center items-start gap-1">
-      <div className="flex flex-row items-center gap-4">
-        <h2 className="sm:text-3xl text-2xl font-bold mb-1">{name}</h2>
-        {userId === session?.user?.id && !isEditing && (
-          <FaPen
-            className="text-gray-500/50 hover:text-gray-500"
-            onClick={() => setIsEditing(!isEditing)}
-          />
-        )}
-      </div>
+    <div className="flex flex-col justify-center items-start gap-3 w-full">
       {!isEditing ? (
         <>
-          {title && <p className="text-md">{title}</p>}
-          {industry && <p className="text-md">{industry}</p>}
-          {location && <p className="text-sm text-gray-500">{location}</p>}
+          <div className="flex flex-row items-center gap-4 w-full">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
+              {name}
+            </h2>
+            {userId === session?.user?.id && (
+              <button
+                onClick={() => setIsEditing(!isEditing)}
+                className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 flex-shrink-0"
+                aria-label="Edit profile information"
+              >
+                <FaPen className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+          <div className="space-y-2">
+            {title && (
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <p className="text-lg font-medium text-gray-700">{title}</p>
+              </div>
+            )}
+            {industry && (
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <p className="text-lg text-gray-600">{industry}</p>
+              </div>
+            )}
+            {location && (
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                <p className="text-sm text-gray-500 font-medium">{location}</p>
+              </div>
+            )}
+          </div>
         </>
       ) : (
-        <UserInfoForm
-          userId={userId}
-          location={location}
-          title={title}
-          industry={industry}
-          setIsEditing={setIsEditing}
-        />
+        <div className="w-full">
+          <UserInfoForm
+            userId={userId}
+            location={location}
+            title={title}
+            industry={industry}
+            setIsEditing={setIsEditing}
+          />
+        </div>
       )}
     </div>
   );
