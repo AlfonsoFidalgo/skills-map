@@ -21,11 +21,10 @@ export default async function UserPage({ params }: { params: Params }) {
   const skills = industry ? await getIndustrySkills(industry.id) : [];
   const skillIds = skills.map((skill) => skill.id);
 
-  const endorsements = await getEndorsementsSummary(
+  const { skillCounts: endorsements, endorsers } = await getEndorsementsSummary(
     userId,
     skillIds as string[]
   );
-  console.log("Endorsements summary:", endorsements);
 
   if (user) {
     return (
@@ -68,8 +67,8 @@ export default async function UserPage({ params }: { params: Params }) {
                       <RadarChartRounded data={endorsements} />
                     ) : (
                       <p className="text-gray-500 text-center">
-                        Not enough endorsements yet. Share your profile and get endorsed
-                        by your peers!
+                        Not enough endorsements yet. Share your profile and get
+                        endorsed by your peers!
                       </p>
                     )}
                   </div>
@@ -77,7 +76,7 @@ export default async function UserPage({ params }: { params: Params }) {
               </div>
 
               <div className="lg:col-span-1">
-                <StatsCardContainer endorsers={12} profileViews={34} />
+                <StatsCardContainer endorsers={endorsers} profileViews={34} />
               </div>
             </div>
           </div>

@@ -23,6 +23,9 @@ export async function getEndorsementsSummary(
         },
       },
     });
+    const uniqueEndorserCount = new Set(
+      endorsements.map((endorsement) => endorsement.endorserId)
+    );
 
     // Group endorsements by skill and count them
     const skillCounts = endorsements.reduce((acc, endorsement) => {
@@ -40,9 +43,12 @@ export async function getEndorsementsSummary(
     }, {} as Record<string, { topic: string; value: number }>);
 
     // Convert to array of objects with topic and value
-    return Object.values(skillCounts);
+    return {
+      skillCounts: Object.values(skillCounts),
+      endorsers: uniqueEndorserCount.size,
+    };
   } catch (error) {
     console.error("Error fetching endorsements:", error);
-    return [];
+    return { skillCounts: [], endorsers: 0 };
   }
 }
