@@ -5,6 +5,8 @@ import { RadarChartRounded } from "@/components/radar-chart";
 import UserInfo from "@/components/user-info";
 import StatsCardContainer from "@/components/stats-card-container";
 import { getIndustryDetails } from "@/actions/industries";
+import { getIndustrySkills } from "@/actions/skills";
+import { getEndorsementsSummary } from "@/actions/endorsements";
 import UserNotFound from "@/components/user-not-found";
 
 type Params = Promise<{ userId: string }>;
@@ -12,10 +14,18 @@ type Params = Promise<{ userId: string }>;
 export default async function UserPage({ params }: { params: Params }) {
   const { userId } = await params;
   const user = await getUser(userId);
-  console.log(user);
   const industry = user?.industryId
     ? await getIndustryDetails(user.industryId)
     : null;
+
+  const skills = industry ? await getIndustrySkills(industry.id) : [];
+  const skillIds = skills.map((skill) => skill.id);
+
+  const endorsements = await getEndorsementsSummary(
+    userId,
+    skillIds as string[]
+  );
+  console.log("Endorsements summary:", endorsements);
 
   if (user) {
     return (
@@ -49,12 +59,19 @@ export default async function UserPage({ params }: { params: Params }) {
               <div className="lg:col-span-2">
                 <div className="mb-6">
                   <h3 className="text-3xl font-bold text-gray-800 mb-2 text-center">
-                    {user.firstName}&apos;s skill map
+                    {user.firstName}&apos;s skills
                   </h3>
                 </div>
                 <div className="flex justify-center">
                   <div className="w-full max-w-md">
-                    <RadarChartRounded />
+                    {endorsements.length > 2 ? (
+                      <RadarChartRounded data={endorsements} />
+                    ) : (
+                      <p className="text-gray-500 text-center">
+                        Not enough endorsements yet. Share your profile and get endorsed
+                        by your peers!
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>

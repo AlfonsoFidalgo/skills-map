@@ -3,17 +3,13 @@
 import React from "react";
 import { curveCardinalClosed, lineRadial, scaleLinear } from "d3";
 
-const rawData = [
-  { topic: "Communication", value: 220 },
-  { topic: "Backend", value: 150 },
-  { topic: "Frontend", value: 260 },
-  { topic: "Devops", value: 50 },
-  { topic: "Planning", value: 210 },
-];
-const maxValue = Math.max(...rawData.map((d) => d.value));
-const numAxes = rawData.length;
-
-export function RadarChartRounded() {
+export function RadarChartRounded({
+  data,
+}: {
+  data: { topic: string; value: number }[];
+}) {
+  const numAxes = data.length;
+  const maxValue = Math.max(...data.map((d) => d.value));
   const radius = 150;
   const angleSlice = (Math.PI * 2) / numAxes;
 
@@ -27,7 +23,7 @@ export function RadarChartRounded() {
     .curve(curveCardinalClosed); // Ensure the path is closed
 
   // Generate the radar chart path
-  const radarPath = radarLine(rawData);
+  const radarPath = radarLine(data);
 
   return (
     <div className="relative mt-10 mb-2">
@@ -94,7 +90,7 @@ export function RadarChartRounded() {
           />
 
           {/* Draw circles for each data point */}
-          {rawData.map((d, i) => (
+          {/* {data.map((d, i) => (
             <React.Fragment key={i}>
               <circle
                 cx={rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2)}
@@ -114,10 +110,10 @@ export function RadarChartRounded() {
                 {d.value}
               </text>
             </React.Fragment>
-          ))}
+          ))} */}
 
           {/* Add labels for each axis */}
-          {rawData.map((d, i) => {
+          {data.map((d, i) => {
             const angle = (angleSlice * i * 180) / Math.PI;
             const x =
               (rScale(maxValue) + 10) * Math.cos(angleSlice * i - Math.PI / 2);
@@ -132,7 +128,7 @@ export function RadarChartRounded() {
                 x={x}
                 y={angle > 90 && angle < 270 ? y + 20 : y - 15}
                 textAnchor="middle"
-                // fontSize="14px"
+                fontSize="14px"
                 className="fill-gray-700 "
                 transform={`rotate(${adjustedAngle}, ${x}, ${y})`}
               >
