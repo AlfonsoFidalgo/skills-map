@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { FaEye } from "react-icons/fa";
-import { FaHandshake } from "react-icons/fa";
+
 import { getUser } from "@/actions/users";
 import { RadarChartRounded } from "@/components/radar-chart";
 import UserInfo from "@/components/user-info";
+import StatsCardContainer from "@/components/stats-card-container";
 import { getIndustryDetails } from "@/actions/industries";
 import UserNotFound from "@/components/user-not-found";
 
@@ -45,9 +45,9 @@ export default async function UserPage({ params }: { params: Params }) {
             </div>
           </div>
           {/* Skills Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 mb-8 bg-white p-2 rounded-2xl shadow-lg border border-gray-100">
             {/* Skills Overview Card */}
-            <div className="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+            <div className="lg:col-span-2 p-8">
               <div className="mb-6">
                 <h3 className="text-3xl font-bold text-gray-800 mb-2 text-center upper">
                   {user.firstName}&apos;s skill map
@@ -60,38 +60,7 @@ export default async function UserPage({ params }: { params: Params }) {
               </div>
             </div>
 
-            {/* Stats Cards */}
-            <div className="space-y-2">
-              <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-800">
-                      Endorsers
-                    </h4>
-                    <p className="text-3xl font-bold text-green-600 mt-2">23</p>
-                  </div>
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <FaHandshake className="w-6 h-6 text-green-600" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-800">
-                      Profile Views
-                    </h4>
-                    <p className="text-3xl font-bold text-purple-600 mt-2">
-                      156
-                    </p>
-                  </div>
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <FaEye className="w-6 h-6 text-purple-600" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <StatsCardContainer endorsers={12} profileViews={34} />
           </div>
         </div>
       </div>

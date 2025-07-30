@@ -90,7 +90,7 @@ export function RadarChartRounded() {
           <path
             d={radarPath ?? ""}
             strokeWidth="1"
-            className="fill-lime-200/20 border-lime-500 stroke-lime-500"
+            className="fill-green-200/20 border-green-600 stroke-green-600"
           />
 
           {/* Draw circles for each data point */}
@@ -101,7 +101,7 @@ export function RadarChartRounded() {
                 cy={rScale(d.value) * Math.sin(angleSlice * i - Math.PI / 2)}
                 r={12}
                 strokeWidth="1"
-                className="fill-gray-100/70 stroke-lime-500"
+                className="fill-gray-100/70 stroke-green-600"
               />
               <text
                 x={rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2)}
