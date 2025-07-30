@@ -8,6 +8,7 @@ import { getIndustryDetails } from "@/actions/industries";
 import { getIndustrySkills } from "@/actions/skills";
 import { getEndorsementsSummary } from "@/actions/endorsements";
 import UserNotFound from "@/components/user-not-found";
+import { EndorseButton } from "@/components/endorse-button";
 
 type Params = Promise<{ userId: string }>;
 
@@ -77,6 +78,7 @@ export default async function UserPage({ params }: { params: Params }) {
 
               <div className="lg:col-span-1">
                 <StatsCardContainer endorsers={endorsers} profileViews={34} />
+                <EndorseButton pageUserId={userId} />
               </div>
             </div>
           </div>

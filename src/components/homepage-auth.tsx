@@ -10,7 +10,6 @@ type HomepageAuthProps = {
 
 export default function HomepageAuth({ session }: HomepageAuthProps) {
   let authContent: React.ReactNode;
-  console.log("session:", session);
 
   if (session?.user) {
     authContent = (

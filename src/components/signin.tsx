@@ -6,7 +6,7 @@ import { signIn, signOut } from "@/actions/auth";
 export default function Home() {
   const session = useSession();
   let authContent: React.ReactNode;
-  console.log("Session:", session);
+
   if (session.status === "loading") {
     authContent = null;
   } else if (session.data?.user) {

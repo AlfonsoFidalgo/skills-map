@@ -11,7 +11,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       profile(profile: any) {
-        console.log("LinkedIn profile:", profile);
         return {
           id: profile.sub,
           name: profile.name,

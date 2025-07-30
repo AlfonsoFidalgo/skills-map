@@ -11,7 +11,7 @@ export default function StatsCardContainer({
   profileViews,
 }: ProfileStatsContainerProps) {
   return (
-    <div className="space-y-4 lg:space-y-6">
+    <div className="space-y-1 lg:space-y-2">
       {/* Endorsers Card */}
       <div className="bg-transparent p-6">
         <div className="flex items-center justify-between">

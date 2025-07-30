@@ -3,6 +3,9 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import { FaPen } from "react-icons/fa";
+import { MdWork } from "react-icons/md";
+import { FaBuilding } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
 import UserInfoForm from "@/components/user-info-form";
 
 type UserInfoProps = {
@@ -44,19 +47,19 @@ export default function UserInfo({
           <div className="space-y-2">
             {title && (
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <MdWork className="w-4 h-4 text-gray-500" />
                 <p className="text-lg font-medium text-gray-700">{title}</p>
               </div>
             )}
             {industry && (
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <FaBuilding className="w-4 h-4 text-gray-500" />
                 <p className="text-lg text-gray-600">{industry}</p>
               </div>
             )}
             {location && (
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                <FaLocationDot className="w-4 h-4 text-gray-500" />
                 <p className="text-sm text-gray-500 font-medium">{location}</p>
               </div>
             )}
