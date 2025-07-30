@@ -7,6 +7,8 @@ import { INDUSTRIES } from "@/utils/constants";
 
 type User = {
   name: string | null;
+  firstName: string | null;
+  lastName: string | null;
   id: string;
   title: string | null;
   location: string | null;
