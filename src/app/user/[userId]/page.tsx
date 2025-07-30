@@ -5,6 +5,7 @@ import { getUser } from "@/actions/users";
 import { RadarChartRounded } from "@/components/radar-chart";
 import UserInfo from "@/components/user-info";
 import { getIndustryDetails } from "@/actions/industries";
+import UserNotFound from "@/components/user-not-found";
 import Breadcrumbs from "@/components/breadcrumbs";
 
 type Params = Promise<{ userId: string }>;
@@ -20,17 +21,17 @@ export default async function UserPage({ params }: { params: Params }) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
         <div className="max-w-5xl mx-auto px-4 py-8">
-          <Breadcrumbs
+          {/* <Breadcrumbs
             items={[
-              { label: "Users", href: "/users" },
+              // { label: "Users", href: "/users" },
               { label: user.name || "User Profile" },
             ]}
-          />
+          /> */}
 
           {/* Header Section */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-8">
             <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-              <div className="relative">
+              <div>
                 <Image
                   className="rounded-full shadow-lg border-4 border-white ring-2 ring-blue-100"
                   src={user.image as string}
@@ -38,7 +39,6 @@ export default async function UserPage({ params }: { params: Params }) {
                   height={120}
                   alt="user photo"
                 />
-                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-white shadow-sm"></div>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <UserInfo
@@ -160,45 +160,9 @@ export default async function UserPage({ params }: { params: Params }) {
               </div>
             </div>
           </div>
-
-          {/* Floating Action Button - Only show for own profile */}
-          {/* This would need session check similar to UserInfo component */}
         </div>
       </div>
     );
   }
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex items-center justify-center">
-      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-12 text-center max-w-md mx-4">
-        <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg
-            className="w-10 h-10 text-red-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 18.5c-.77.833.192 2.5 1.732 2.5z"
-            />
-          </svg>
-        </div>
-        <h1 className="text-2xl font-bold text-gray-800 mb-3">
-          User Not Found
-        </h1>
-        <p className="text-gray-600 mb-6">
-          The user you&apos;re looking for doesn&apos;t exist or has been
-          removed.
-        </p>
-        <Link
-          href="/"
-          className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          Back to Home
-        </Link>
-      </div>
-    </div>
-  );
+  return <UserNotFound />;
 }
