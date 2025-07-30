@@ -21,9 +21,8 @@ export default async function UserPage({ params }: { params: Params }) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
         <div className="max-w-5xl mx-auto px-4 py-8">
-          {/* Header Section */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-8">
-            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start mb-8">
               <div>
                 <Image
                   className="rounded-full shadow-lg border-4 border-white ring-2 ring-blue-100"
@@ -43,24 +42,27 @@ export default async function UserPage({ params }: { params: Params }) {
                 />
               </div>
             </div>
-          </div>
-          {/* Skills Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 mb-8 bg-white p-2 rounded-2xl shadow-lg border border-gray-100">
-            {/* Skills Overview Card */}
-            <div className="lg:col-span-2 p-8">
-              <div className="mb-6">
-                <h3 className="text-3xl font-bold text-gray-800 mb-2 text-center upper">
-                  {user.firstName}&apos;s skill map
-                </h3>
-              </div>
-              <div className="flex justify-center">
-                <div className="w-full max-w-md">
-                  <RadarChartRounded />
+
+            <div className="border-t border-gray-200 mb-8"></div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2">
+                <div className="mb-6">
+                  <h3 className="text-3xl font-bold text-gray-800 mb-2 text-center">
+                    {user.firstName}&apos;s skill map
+                  </h3>
+                </div>
+                <div className="flex justify-center">
+                  <div className="w-full max-w-md">
+                    <RadarChartRounded />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <StatsCardContainer endorsers={12} profileViews={34} />
+              <div className="lg:col-span-1">
+                <StatsCardContainer endorsers={12} profileViews={34} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
