@@ -11,33 +11,43 @@ export default function StatsCardContainer({
   profileViews,
 }: ProfileStatsContainerProps) {
   return (
-    <div className="space-y-2 flex flex-row lg:flex-col justify-center lg:justify-start lg:mt-10">
-      <div className="p-6">
+    <div className="space-y-4 lg:space-y-6">
+      {/* Endorsers Card */}
+      <div className="bg-transparent p-6">
         <div className="flex items-center justify-between">
-          <div>
-            <h4 className="text-lg font-semibold text-gray-800">Endorsers</h4>
-            <p className="text-3xl font-bold text-green-600 mt-2">
-              {endorsers}
+          <div className="flex-1">
+            <h4 className="text-lg font-semibold text-gray-800 mb-1">
+              Endorsers
+            </h4>
+            <p className="text-3xl font-bold text-green-600">
+              {endorsers || 0}
+            </p>
+            <p className="text-sm text-gray-500 mt-1">
+              People who endorsed you
             </p>
           </div>
-          <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center ml-4">
-            <FaHandshake className="w-6 h-6 text-green-600" />
+          <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+            <FaHandshake className="w-7 h-7 text-green-600" />
           </div>
         </div>
       </div>
 
-      <div className="p-6">
+      {/* Profile Views Card */}
+      <div className="bg-transparent p-6">
         <div className="flex items-center justify-between">
-          <div>
-            <h4 className="text-lg font-semibold text-gray-800">
+          <div className="flex-1">
+            <h4 className="text-lg font-semibold text-gray-800 mb-1">
               Profile Views
             </h4>
-            <p className="text-3xl font-bold text-purple-600 mt-2">
-              {profileViews}
+            <p className="text-3xl font-bold text-purple-600">
+              {profileViews || 0}
+            </p>
+            <p className="text-sm text-gray-500 mt-1">
+              Times your profile was viewed
             </p>
           </div>
-          <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center ml-4">
-            <FaEye className="w-6 h-6 text-purple-600" />
+          <div className="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+            <FaEye className="w-7 h-7 text-purple-600" />
           </div>
         </div>
       </div>
