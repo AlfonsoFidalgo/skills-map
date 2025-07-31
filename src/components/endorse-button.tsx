@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useSession } from "next-auth/react";
 import { signIn } from "@/actions/auth";
 
 import EndorseModal from "./endorse-modal";
@@ -10,18 +9,21 @@ import LinkedInButton from "@/components/UI/linkedin-button";
 
 type EndorseButtonProps = {
   pageUserId: string;
+  sessionUserId: string | undefined;
   userName: string | null;
   skills: Partial<Skill>[];
 };
 export function EndorseButton({
   pageUserId,
+  sessionUserId,
   userName,
   skills,
 }: EndorseButtonProps) {
-  const session = useSession();
+  //   const session = useSession();
   const [open, setOpen] = React.useState(false);
 
-  if (!session.data?.user) {
+  //user not logged in
+  if (!sessionUserId) {
     return (
       <>
         <div className="border-t border-gray-200 mb-8"></div>
@@ -31,7 +33,8 @@ export function EndorseButton({
       </>
     );
   }
-  if (session.data.user.id !== pageUserId) {
+  //user logged in and not viewing their own profile
+  if (sessionUserId !== pageUserId) {
     return (
       <>
         <div className="border-t border-gray-200 mb-8"></div>

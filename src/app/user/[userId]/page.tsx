@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { auth } from "@/auth";
 import { getUser } from "@/actions/users";
 import { RadarChartRounded } from "@/components/radar-chart";
 import UserInfo from "@/components/user-info";
@@ -13,20 +14,22 @@ import { EndorseButton } from "@/components/endorse-button";
 type Params = Promise<{ userId: string }>;
 
 export default async function UserPage({ params }: { params: Params }) {
-  const { userId } = await params;
-  const user = await getUser(userId); //User of the profile page
+  const { userId: pageUserId } = await params;
+  const user = await getUser(pageUserId); //User of the profile page
+  const session = await auth();
+  const sessionUserId = session?.user?.id;
 
-  //Industry of the user
+  //Industry of the page user
   const industry = user?.industryId
     ? await getIndustryDetails(user.industryId)
     : null;
 
-  // Skills related to the user's industry
+  // Skills related to the page user's industry
   const skills = industry ? await getIndustrySkills(industry.id) : [];
   const skillIds = skills.map((skill) => skill.id);
 
   const { skillCounts: endorsements, endorsers } = await getEndorsementsSummary(
-    userId,
+    pageUserId,
     skillIds as string[]
   );
   console.log("Endorsements:", endorsements, endorsers);
@@ -83,7 +86,8 @@ export default async function UserPage({ params }: { params: Params }) {
               <div className="lg:col-span-1">
                 <StatsCardContainer endorsers={endorsers} profileViews={34} />
                 <EndorseButton
-                  pageUserId={userId}
+                  pageUserId={pageUserId}
+                  sessionUserId={sessionUserId}
                   userName={user.firstName}
                   skills={skills}
                 />

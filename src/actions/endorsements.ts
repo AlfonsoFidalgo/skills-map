@@ -52,3 +52,24 @@ export async function getEndorsementsSummary(
     return { skillCounts: [], endorsers: 0 };
   }
 }
+
+export async function getUserEndorsements(
+  endorserId: string,
+  endorseeId: string
+) {
+  try {
+    const endorsements = await prisma.endorsement.findMany({
+      where: {
+        endorserId,
+        endorseeId,
+      },
+      // include: {
+      //   skill: true,
+      // },
+    });
+    return endorsements;
+  } catch (error) {
+    console.error("Error fetching user endorsements:", error);
+    return [];
+  }
+}

@@ -24,7 +24,7 @@ export default function EndorseModal({
   skills,
 }: EndorseModalProps) {
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
-  console.log(selectedSkills);
+
   const toggleSkill = (skill: string) => {
     setSelectedSkills((prev) => {
       if (prev.includes(skill)) {
