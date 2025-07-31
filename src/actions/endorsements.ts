@@ -2,6 +2,14 @@
 
 import prisma from "@/db";
 
+export type Endorsement = {
+  id: string;
+  endorserId: string;
+  endorseeId: string;
+  skillId: string;
+  createdAt: Date;
+};
+
 export async function getEndorsementsSummary(
   userId: string,
   skillIds: string[]

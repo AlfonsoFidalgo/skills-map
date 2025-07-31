@@ -15,6 +15,7 @@ type EndorseModalProps = {
   setOpen: (arg: boolean) => void;
   userName: string | null;
   skills: Partial<Skill>[];
+  endorsedSkillsIds: string[];
 };
 
 export default function EndorseModal({
@@ -22,8 +23,10 @@ export default function EndorseModal({
   setOpen,
   userName,
   skills,
+  endorsedSkillsIds,
 }: EndorseModalProps) {
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+
+  const [selectedSkills, setSelectedSkills] = useState<string[]>(endorsedSkillsIds);
 
   const toggleSkill = (skill: string) => {
     setSelectedSkills((prev) => {

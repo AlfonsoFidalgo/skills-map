@@ -12,12 +12,14 @@ type EndorseButtonProps = {
   sessionUserId: string | undefined;
   userName: string | null;
   skills: Partial<Skill>[];
+  endorsedSkillsIds: string[];
 };
 export function EndorseButton({
   pageUserId,
   sessionUserId,
   userName,
   skills,
+  endorsedSkillsIds,
 }: EndorseButtonProps) {
   //   const session = useSession();
   const [open, setOpen] = React.useState(false);
@@ -51,6 +53,7 @@ export function EndorseButton({
           setOpen={setOpen}
           userName={userName}
           skills={skills}
+          endorsedSkillsIds={endorsedSkillsIds}
         />
       </>
     );

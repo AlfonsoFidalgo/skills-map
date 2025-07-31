@@ -7,9 +7,11 @@ import UserInfo from "@/components/user-info";
 import StatsCardContainer from "@/components/stats-card-container";
 import { getIndustryDetails } from "@/actions/industries";
 import { getIndustrySkills } from "@/actions/skills";
+import { getUserEndorsements } from "@/actions/endorsements";
 import { getEndorsementsSummary } from "@/actions/endorsements";
 import UserNotFound from "@/components/user-not-found";
 import { EndorseButton } from "@/components/endorse-button";
+import { type Endorsement } from "@/actions/endorsements";
 
 type Params = Promise<{ userId: string }>;
 
@@ -33,6 +35,20 @@ export default async function UserPage({ params }: { params: Params }) {
     skillIds as string[]
   );
   console.log("Endorsements:", endorsements, endorsers);
+
+  //current user endorsements
+  let sessionUserEndorsements = [] as Endorsement[];
+  if (sessionUserId) {
+    sessionUserEndorsements = await getUserEndorsements(
+      sessionUserId,
+      pageUserId
+    );
+
+    console.log("Session User Endorsements:", sessionUserEndorsements);
+  }
+  const endorsedSkillsIds: string[] = sessionUserEndorsements.map(
+    (endorsement) => endorsement.skillId
+  );
 
   if (user) {
     return (
@@ -90,6 +106,7 @@ export default async function UserPage({ params }: { params: Params }) {
                   sessionUserId={sessionUserId}
                   userName={user.firstName}
                   skills={skills}
+                  endorsedSkillsIds={endorsedSkillsIds}
                 />
               </div>
             </div>
