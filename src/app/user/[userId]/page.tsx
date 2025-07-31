@@ -14,11 +14,14 @@ type Params = Promise<{ userId: string }>;
 
 export default async function UserPage({ params }: { params: Params }) {
   const { userId } = await params;
-  const user = await getUser(userId);
+  const user = await getUser(userId); //User of the profile page
+
+  //Industry of the user
   const industry = user?.industryId
     ? await getIndustryDetails(user.industryId)
     : null;
 
+  // Skills related to the user's industry
   const skills = industry ? await getIndustrySkills(industry.id) : [];
   const skillIds = skills.map((skill) => skill.id);
 
@@ -26,6 +29,7 @@ export default async function UserPage({ params }: { params: Params }) {
     userId,
     skillIds as string[]
   );
+  console.log("Endorsements:", endorsements, endorsers);
 
   if (user) {
     return (
@@ -59,7 +63,7 @@ export default async function UserPage({ params }: { params: Params }) {
               <div className="lg:col-span-2">
                 <div className="mb-6">
                   <h3 className="text-3xl font-bold text-gray-800 mb-2 text-center">
-                    {user.firstName}&apos;s skills
+                    {user.firstName}&apos;s {industry?.name} skills
                   </h3>
                 </div>
                 <div className="flex justify-center">
@@ -78,7 +82,11 @@ export default async function UserPage({ params }: { params: Params }) {
 
               <div className="lg:col-span-1">
                 <StatsCardContainer endorsers={endorsers} profileViews={34} />
-                <EndorseButton pageUserId={userId} userName={user.firstName} skills={skills}/>
+                <EndorseButton
+                  pageUserId={userId}
+                  userName={user.firstName}
+                  skills={skills}
+                />
               </div>
             </div>
           </div>

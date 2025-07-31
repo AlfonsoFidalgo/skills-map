@@ -8,7 +8,7 @@ import {
 } from "@headlessui/react";
 import { FaHandshake } from "react-icons/fa";
 import { useState } from "react";
-import { Skill } from "@/actions/skills";
+import { type Skill } from "@/actions/skills";
 
 type EndorseModalProps = {
   open: boolean;
