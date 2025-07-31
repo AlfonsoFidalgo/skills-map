@@ -53,6 +53,8 @@ export function EndorseButton({
           setOpen={setOpen}
           userName={userName}
           skills={skills}
+          endorserId={sessionUserId}
+          endorseeId={pageUserId}
           endorsedSkillsIds={endorsedSkillsIds}
         />
       </>

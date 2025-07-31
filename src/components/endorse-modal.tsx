@@ -9,11 +9,14 @@ import {
 import { FaHandshake } from "react-icons/fa";
 import { useState } from "react";
 import { type Skill } from "@/actions/skills";
+import { createEndorsement } from "@/actions/endorsements";
 
 type EndorseModalProps = {
   open: boolean;
   setOpen: (arg: boolean) => void;
   userName: string | null;
+  endorserId: string;
+  endorseeId: string;
   skills: Partial<Skill>[];
   endorsedSkillsIds: string[];
 };
@@ -22,12 +25,14 @@ export default function EndorseModal({
   open,
   setOpen,
   userName,
+  endorserId,
+  endorseeId,
   skills,
   endorsedSkillsIds,
 }: EndorseModalProps) {
-
-  const [selectedSkills, setSelectedSkills] = useState<string[]>(endorsedSkillsIds);
-
+  const [selectedSkills, setSelectedSkills] =
+    useState<string[]>(endorsedSkillsIds);
+  console.log("Selected Skills:", selectedSkills);
   const toggleSkill = (skill: string) => {
     setSelectedSkills((prev) => {
       if (prev.includes(skill)) {
@@ -117,7 +122,10 @@ export default function EndorseModal({
               <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <button
                   type="button"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    createEndorsement(endorserId, endorseeId, selectedSkills);
+                    setOpen(false);
+                  }}
                   disabled={!canEndorse}
                   className={`inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold shadow-xs sm:ml-3 sm:w-auto transition-all duration-200 ease-in-out ${
                     canEndorse
@@ -132,7 +140,10 @@ export default function EndorseModal({
                 <button
                   type="button"
                   data-autofocus
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setSelectedSkills(endorsedSkillsIds);
+                    setOpen(false);
+                  }}
                   className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
                 >
                   Cancel

@@ -71,13 +71,49 @@ export async function getUserEndorsements(
         endorserId,
         endorseeId,
       },
-      // include: {
-      //   skill: true,
-      // },
     });
     return endorsements;
   } catch (error) {
     console.error("Error fetching user endorsements:", error);
     return [];
+  }
+}
+
+export async function deleteEndorsements(
+  endorserId: string,
+  endorseeId: string
+) {
+  try {
+    const endorsement = await prisma.endorsement.deleteMany({
+      where: {
+        endorserId,
+        endorseeId,
+      },
+    });
+    return endorsement;
+  } catch (error) {
+    console.error("Error deleting endorsement:", error);
+    return null;
+  }
+}
+
+export async function createEndorsement(
+  endorserId: string,
+  endorseeId: string,
+  skillIds: string[]
+) {
+  try {
+    await deleteEndorsements(endorserId, endorseeId);
+    const endorsements = await prisma.endorsement.createMany({
+      data: skillIds.map((skillId) => ({
+        endorserId,
+        endorseeId,
+        skillId,
+      })),
+    });
+    return endorsements;
+  } catch (error) {
+    console.error("Error creating endorsement:", error);
+    return null;
   }
 }
