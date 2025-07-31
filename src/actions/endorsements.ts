@@ -79,15 +79,20 @@ export async function getUserEndorsements(
   }
 }
 
+//TODO: delete only on specific industry
 export async function deleteEndorsements(
   endorserId: string,
-  endorseeId: string
+  endorseeId: string,
+  skillsList: string[]
 ) {
   try {
     const endorsement = await prisma.endorsement.deleteMany({
       where: {
         endorserId,
         endorseeId,
+        skillId: {
+          in: skillsList,
+        },
       },
     });
     return endorsement;
@@ -100,10 +105,11 @@ export async function deleteEndorsements(
 export async function createEndorsement(
   endorserId: string,
   endorseeId: string,
-  skillIds: string[]
+  skillIds: string[],
+  skillsList: string[]
 ) {
   try {
-    await deleteEndorsements(endorserId, endorseeId);
+    await deleteEndorsements(endorserId, endorseeId, skillsList);
     const endorsements = await prisma.endorsement.createMany({
       data: skillIds.map((skillId) => ({
         endorserId,

@@ -32,7 +32,7 @@ export default function EndorseModal({
 }: EndorseModalProps) {
   const [selectedSkills, setSelectedSkills] =
     useState<string[]>(endorsedSkillsIds);
-  console.log("Selected Skills:", selectedSkills);
+
   const toggleSkill = (skill: string) => {
     setSelectedSkills((prev) => {
       if (prev.includes(skill)) {
@@ -123,7 +123,12 @@ export default function EndorseModal({
                 <button
                   type="button"
                   onClick={() => {
-                    createEndorsement(endorserId, endorseeId, selectedSkills);
+                    createEndorsement(
+                      endorserId,
+                      endorseeId,
+                      selectedSkills,
+                      skills.map((skill) => skill.id!)
+                    );
                     setOpen(false);
                   }}
                   disabled={!canEndorse}
