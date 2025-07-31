@@ -34,7 +34,6 @@ export default async function UserPage({ params }: { params: Params }) {
     pageUserId,
     skillIds as string[]
   );
-  console.log("Endorsements:", endorsements, endorsers);
 
   //current user endorsements
   let sessionUserEndorsements = [] as Endorsement[];
@@ -43,12 +42,11 @@ export default async function UserPage({ params }: { params: Params }) {
       sessionUserId,
       pageUserId
     );
-
-    console.log("Session User Endorsements:", sessionUserEndorsements);
   }
-  const endorsedSkillsIds: string[] = sessionUserEndorsements.map(
-    (endorsement) => endorsement.skillId
-  );
+  // Endorsed skill ids from the industry of the page user
+  const endorsedSkillsIds: string[] = sessionUserEndorsements
+    .map((endorsement) => endorsement.skillId)
+    .filter((skillId) => skillIds.includes(skillId));
 
   if (user) {
     return (
