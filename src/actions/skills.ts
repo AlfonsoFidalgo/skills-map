@@ -2,7 +2,7 @@
 
 import prisma from "@/db";
 
-type Skill = {
+export type Skill = {
   id: string;
   name: string;
   description?: string | null;

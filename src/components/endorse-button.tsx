@@ -4,9 +4,19 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import { signIn } from "@/actions/auth";
 
-import EndorseModal from "./modal";
+import EndorseModal from "./endorse-modal";
+import { Skill } from "@/actions/skills";
 
-export function EndorseButton({ pageUserId }: { pageUserId: string }) {
+type EndorseButtonProps = {
+  pageUserId: string;
+  userName: string | null;
+  skills: Partial<Skill>[];
+};
+export function EndorseButton({
+  pageUserId,
+  userName,
+  skills,
+}: EndorseButtonProps) {
   const session = useSession();
   const [open, setOpen] = React.useState(false);
 
@@ -40,7 +50,12 @@ export function EndorseButton({ pageUserId }: { pageUserId: string }) {
             Endorse
           </button>
         </div>
-        <EndorseModal open={open} setOpen={setOpen}/>
+        <EndorseModal
+          open={open}
+          setOpen={setOpen}
+          userName={userName}
+          skills={skills}
+        />
       </>
     );
   }

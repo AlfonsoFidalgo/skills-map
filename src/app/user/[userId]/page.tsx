@@ -78,7 +78,7 @@ export default async function UserPage({ params }: { params: Params }) {
 
               <div className="lg:col-span-1">
                 <StatsCardContainer endorsers={endorsers} profileViews={34} />
-                <EndorseButton pageUserId={userId} />
+                <EndorseButton pageUserId={userId} userName={user.firstName} skills={skills}/>
               </div>
             </div>
           </div>
