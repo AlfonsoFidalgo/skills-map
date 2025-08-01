@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/db";
+import { Skill } from "./skills";
 
 export type Endorsement = {
   id: string;
@@ -101,28 +102,43 @@ export async function deleteEndorsements(
   }
 }
 
-export async function createEndorsement(
-  endorserId: string,
-  endorseeId: string,
-  skillIds: string[],
-  skillsList: string[]
-) {
+type CreateEndorsementActionState = {
+  success: boolean | null;
+  message: string;
+};
+
+type EndorsementData = {
+  endorserId: string;
+  endorseeId: string;
+  selectedSkills: string[];
+  skillsList: string[];
+};
+
+export async function createEndorsement({
+  endorserId,
+  endorseeId,
+  selectedSkills,
+  skillsList,
+}: EndorsementData): Promise<CreateEndorsementActionState | null> {
   if (endorseeId === endorserId) {
     console.error("Endorser and endorsee cannot be the same.");
-    return null;
+    return {
+      success: false,
+      message: "You cannot endorse yourself.",
+    };
   }
   try {
     await deleteEndorsements(endorserId, endorseeId, skillsList);
-    const endorsements = await prisma.endorsement.createMany({
-      data: skillIds.map((skillId) => ({
+    await prisma.endorsement.createMany({
+      data: selectedSkills.map((skillId) => ({
         endorserId,
         endorseeId,
         skillId,
       })),
     });
-    return endorsements;
+    return { success: true, message: "Endorsement created successfully" };
   } catch (error) {
     console.error("Error creating endorsement:", error);
-    return null;
+    return { success: false, message: "Failed to create endorsement" };
   }
 }

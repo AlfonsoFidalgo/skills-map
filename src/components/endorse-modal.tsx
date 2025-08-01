@@ -1,5 +1,6 @@
 "use client";
 
+import { useActionState } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -10,6 +11,7 @@ import { FaHandshake } from "react-icons/fa";
 import { useState } from "react";
 import { type Skill } from "@/actions/skills";
 import { createEndorsement } from "@/actions/endorsements";
+import React from "react";
 
 type EndorseModalProps = {
   open: boolean;
@@ -32,6 +34,26 @@ export default function EndorseModal({
 }: EndorseModalProps) {
   const [selectedSkills, setSelectedSkills] =
     useState<string[]>(endorsedSkillsIds);
+
+  const [actionState, action] = useActionState(
+    createEndorsement.bind(null, {
+      endorserId,
+      endorseeId,
+      selectedSkills,
+      skillsList: skills.map((skill) => skill.id!),
+    }),
+    {
+      success: null,
+      message: "",
+    }
+  );
+
+  React.useEffect(() => {
+    if (actionState?.success) {
+      setOpen(false);
+      setSelectedSkills(endorsedSkillsIds);
+    }
+  }, [actionState, endorsedSkillsIds, setOpen]);
 
   const toggleSkill = (skill: string) => {
     setSelectedSkills((prev) => {
@@ -109,10 +131,9 @@ export default function EndorseModal({
                           </button>
                         ))}
                       </div>
-                      {selectedSkills.length > 0 && (
-                        <p className="mt-2 text-xs text-gray-600">
-                          Selected: {selectedSkills.join(", ")} (
-                          {selectedSkills.length}/2)
+                      {actionState?.success === false && (
+                        <p className="mt-2 text-sm text-red-500 text-center">
+                          {actionState.message}
                         </p>
                       )}
                     </div>
@@ -120,28 +141,21 @@ export default function EndorseModal({
                 </div>
               </div>
               <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                <button
-                  type="button"
-                  onClick={() => {
-                    createEndorsement(
-                      endorserId,
-                      endorseeId,
-                      selectedSkills,
-                      skills.map((skill) => skill.id!)
-                    );
-                    setOpen(false);
-                  }}
-                  disabled={!canEndorse}
-                  className={`inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold shadow-xs sm:ml-3 sm:w-auto transition-all duration-200 ease-in-out ${
-                    canEndorse
-                      ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 hover:shadow-xl"
-                      : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  }`}
-                >
-                  {selectedSkills.length > 0
-                    ? `Endorse (${selectedSkills.length})`
-                    : "Endorse"}
-                </button>
+                <form action={action}>
+                  <button
+                    type="submit"
+                    disabled={!canEndorse}
+                    className={`inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold shadow-xs sm:ml-3 sm:w-auto transition-all duration-200 ease-in-out ${
+                      canEndorse
+                        ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 hover:shadow-xl"
+                        : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    }`}
+                  >
+                    {selectedSkills.length > 0
+                      ? `Endorse (${selectedSkills.length})`
+                      : "Endorse"}
+                  </button>
+                </form>
                 <button
                   type="button"
                   data-autofocus
