@@ -35,7 +35,7 @@ export default function EndorseModal({
   const [selectedSkills, setSelectedSkills] =
     useState<string[]>(endorsedSkillsIds);
 
-  const [actionState, action] = useActionState(
+  const [actionState, action, isPending] = useActionState(
     createEndorsement.bind(null, {
       endorserId,
       endorseeId,
@@ -151,9 +151,7 @@ export default function EndorseModal({
                         : "bg-gray-300 text-gray-500 cursor-not-allowed"
                     }`}
                   >
-                    {selectedSkills.length > 0
-                      ? `Endorse (${selectedSkills.length})`
-                      : "Endorse"}
+                    {isPending ? "Endorsing..." : "Endorse"}
                   </button>
                 </form>
                 <button
