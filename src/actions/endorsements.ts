@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/db";
-import { Skill } from "./skills";
+import { revalidatePath } from "next/cache";
 
 export type Endorsement = {
   id: string;
@@ -136,6 +136,7 @@ export async function createEndorsement({
         skillId,
       })),
     });
+    revalidatePath("/user/" + endorseeId);
     return { success: true, message: "Endorsement created successfully" };
   } catch (error) {
     console.error("Error creating endorsement:", error);
