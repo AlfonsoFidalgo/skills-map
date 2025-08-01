@@ -89,8 +89,9 @@ export default async function UserPage({ params }: { params: Params }) {
                       <RadarChartRounded data={endorsements} />
                     ) : (
                       <p className="text-gray-500 text-center">
-                        Not enough endorsements yet. Share your profile and get
-                        endorsed by your peers!
+                        {!industry
+                          ? "Profile not complete yet, select an industry to get started"
+                          : "Not enough endorsements yet. Share your profile and get endorsed by your peers!"}
                       </p>
                     )}
                   </div>
@@ -105,6 +106,7 @@ export default async function UserPage({ params }: { params: Params }) {
                   userName={user.firstName}
                   skills={skills}
                   endorsedSkillsIds={endorsedSkillsIds}
+                  industrySelected={industry !== null}
                 />
               </div>
             </div>

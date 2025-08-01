@@ -12,6 +12,7 @@ type EndorseButtonProps = {
   sessionUserId: string | undefined;
   userName: string | null;
   skills: Partial<Skill>[];
+  industrySelected: boolean;
   endorsedSkillsIds: string[];
 };
 export function EndorseButton({
@@ -19,6 +20,7 @@ export function EndorseButton({
   sessionUserId,
   userName,
   skills,
+  industrySelected,
   endorsedSkillsIds,
 }: EndorseButtonProps) {
   //   const session = useSession();
@@ -34,6 +36,10 @@ export function EndorseButton({
         </form>
       </>
     );
+  }
+
+  if (!industrySelected) {
+    return;
   }
   //user logged in and not viewing their own profile
   if (sessionUserId !== pageUserId) {
