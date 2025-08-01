@@ -79,7 +79,6 @@ export async function getUserEndorsements(
   }
 }
 
-//TODO: delete only on specific industry
 export async function deleteEndorsements(
   endorserId: string,
   endorseeId: string,
@@ -108,6 +107,10 @@ export async function createEndorsement(
   skillIds: string[],
   skillsList: string[]
 ) {
+  if (endorseeId === endorserId) {
+    console.error("Endorser and endorsee cannot be the same.");
+    return null;
+  }
   try {
     await deleteEndorsements(endorserId, endorseeId, skillsList);
     const endorsements = await prisma.endorsement.createMany({
