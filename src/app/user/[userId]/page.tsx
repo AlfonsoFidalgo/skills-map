@@ -76,7 +76,7 @@ export default async function UserPage({ params }: { params: Params }) {
 
             <div className="border-t border-gray-200 mb-8"></div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
               <div className="lg:col-span-2">
                 <div className="mb-6">
                   <h3 className="text-3xl font-bold text-gray-800 mb-2 text-center">
