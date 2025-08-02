@@ -1,17 +1,16 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useActionState } from "react";
 import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
-  DialogTitle,
 } from "@headlessui/react";
 import { FaHandshake } from "react-icons/fa";
-import { useState } from "react";
 import { type Skill } from "@/actions/skills";
 import { createEndorsement } from "@/actions/endorsements";
-import React from "react";
+import EndorseModalContent from "@/components/endorse-modal-content";
 
 type EndorseModalProps = {
   open: boolean;
@@ -48,7 +47,7 @@ export default function EndorseModal({
     }
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (actionState?.success) {
       setOpen(false);
       setSelectedSkills(endorsedSkillsIds);
@@ -90,54 +89,13 @@ export default function EndorseModal({
                       className="size-6 text-green-600"
                     />
                   </div>
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <DialogTitle
-                      as="h3"
-                      className="text-base font-semibold text-gray-900"
-                    >
-                      {userName ? `Endorse ${userName}` : "Endorse"}
-                    </DialogTitle>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        {`You can endorse ${userName} on up to two of the following skills:`}
-                      </p>
-                      <div className="mt-4 space-y-2">
-                        {skills.map((skill) => (
-                          <button
-                            key={skill.id}
-                            onClick={() => toggleSkill(skill.id!)}
-                            disabled={
-                              !selectedSkills.includes(skill.id!) &&
-                              selectedSkills.length >= 2
-                            }
-                            className={`w-full text-left px-3 py-2 rounded-md border transition-colors ${
-                              selectedSkills.includes(skill.id!)
-                                ? "bg-green-50 border-green-300 text-green-800"
-                                : selectedSkills.length >= 2
-                                ? "bg-gray-50 border-gray-200 text-gray-400 cursor-not-allowed"
-                                : "bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
-                            }`}
-                          >
-                            <div className="flex items-center justify-between">
-                              <span className="text-sm font-medium">
-                                {skill.name}
-                              </span>
-                              {selectedSkills.includes(skill.id!) && (
-                                <span className="text-green-600 text-sm">
-                                  ✓
-                                </span>
-                              )}
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                      {actionState?.success === false && (
-                        <p className="mt-2 text-sm text-red-500 text-center">
-                          {actionState.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
+                  <EndorseModalContent
+                    userName={userName}
+                    skills={skills}
+                    toggleSkill={toggleSkill}
+                    selectedSkills={selectedSkills}
+                    actionState={actionState}
+                  />
                 </div>
               </div>
               <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
