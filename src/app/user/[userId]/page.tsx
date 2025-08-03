@@ -10,7 +10,7 @@ import { getIndustrySkills } from "@/actions/skills";
 import { getUserEndorsements } from "@/actions/endorsements";
 import { getEndorsementsSummary } from "@/actions/endorsements";
 import UserNotFound from "@/components/user-not-found";
-import { EndorseButton } from "@/components/endorse-button";
+import EndorseContainer from "@/components/endorse-container";
 import { type Endorsement } from "@/actions/endorsements";
 
 type Params = Promise<{ userId: string }>;
@@ -100,7 +100,7 @@ export default async function UserPage({ params }: { params: Params }) {
 
               <div className="lg:col-span-1">
                 <StatsCardContainer endorsers={endorsers} profileViews={34} />
-                <EndorseButton
+                <EndorseContainer
                   pageUserId={pageUserId}
                   sessionUserId={sessionUserId}
                   userName={user.firstName}

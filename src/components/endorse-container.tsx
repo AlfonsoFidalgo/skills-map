@@ -15,7 +15,7 @@ type EndorseButtonProps = {
   industrySelected: boolean;
   endorsedSkillsIds: string[];
 };
-export function EndorseButton({
+export default function EndorseContainer({
   pageUserId,
   sessionUserId,
   userName,
