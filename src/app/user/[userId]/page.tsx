@@ -29,10 +29,12 @@ export default async function UserPage({ params }: { params: Params }) {
   // Skills related to the page user's industry
   const skills = industry ? await getIndustrySkills(industry.id) : [];
   const skillIds = skills.map((skill) => skill.id);
+  const skillNames = skills.map(skill => skill.name)
 
   const { skillCounts: endorsements, endorsers } = await getEndorsementsSummary(
     pageUserId,
-    skillIds as string[]
+    skillIds as string[],
+    skillNames as string[]
   );
 
   //current user endorsements

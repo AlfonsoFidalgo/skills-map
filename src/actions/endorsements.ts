@@ -13,7 +13,8 @@ export type Endorsement = {
 
 export async function getEndorsementsSummary(
   userId: string,
-  skillIds: string[]
+  skillIds: string[],
+  skillNames: string[]
 ) {
   try {
     const endorsements = await prisma.endorsement.findMany({
@@ -36,24 +37,23 @@ export async function getEndorsementsSummary(
       endorsements.map((endorsement) => endorsement.endorserId)
     );
 
-    // Group endorsements by skill and count them
-    const skillCounts = endorsements.reduce((acc, endorsement) => {
-      const skillId = endorsement.skill.id;
-      const skillName = endorsement.skill.name;
-
-      if (!acc[skillId]) {
-        acc[skillId] = {
-          topic: skillName,
-          value: 0,
-        };
-      }
-      acc[skillId].value += 1;
+    const skillMap = skillNames.reduce((acc, curr) => {
+      acc[curr] = 0; //Math.floor(Math.random() * 20);
       return acc;
-    }, {} as Record<string, { topic: string; value: number }>);
+    }, {} as Record<string, number>);
 
-    // Convert to array of objects with topic and value
+    endorsements.forEach((endorsement) => {
+      const skillName = endorsement.skill.name;
+      skillMap[skillName]++;
+    });
+
+    const skillMapTransformed = [];
+    for (const k in skillMap) {
+      skillMapTransformed.push({ topic: k, value: skillMap[k] });
+    }
+    
     return {
-      skillCounts: Object.values(skillCounts),
+      skillCounts: skillMapTransformed,
       endorsers: uniqueEndorserCount.size,
     };
   } catch (error) {
