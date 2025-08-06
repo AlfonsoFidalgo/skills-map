@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import HomepageAuth from "@/components/homepage-auth";
+import HomepageCTAs from "@/components/homepage-ctas";
 import { type Session } from "@/types/session";
 
 export default async function Home() {
@@ -32,8 +33,7 @@ export default async function Home() {
               </h1>
               <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 Get endorsed for your skills and showcase your expertise to the
-                world. Build your professional network through skill-based
-                connections.
+                world. Understand your strengths and areas of growth.
               </p>
             </div>
 
@@ -66,88 +66,10 @@ export default async function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {/* Feature 1 */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-6">
-              <svg
-                className="w-8 h-8 text-blue-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-3">
-              Build Your Profile
-            </h3>
-            <p className="text-gray-600">
-              Create a comprehensive profile showcasing your professional skills
-              and expertise across different industries.
-            </p>
-          </div>
-
-          {/* Feature 2 */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-6">
-              <svg
-                className="w-8 h-8 text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-3">
-              Get Endorsed
-            </h3>
-            <p className="text-gray-600">
-              Receive skill endorsements from colleagues and peers to validate
-              your expertise and build credibility.
-            </p>
-          </div>
-
-          {/* Feature 3 */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div className="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-6">
-              <svg
-                className="w-8 h-8 text-purple-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-3">
-              Visualize Growth
-            </h3>
-            <p className="text-gray-600">
-              Track your skill development with interactive charts and visual
-              representations of your professional growth.
-            </p>
-          </div>
-        </div>
+        <HomepageCTAs />
 
         {/* Stats Section */}
-        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-12">
+        {/* <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-4xl font-bold text-blue-600 mb-2">
@@ -172,7 +94,7 @@ export default async function Home() {
               <div className="text-gray-600 font-medium">Satisfaction Rate</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
