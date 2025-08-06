@@ -29,13 +29,20 @@ export default async function UserPage({ params }: { params: Params }) {
   // Skills related to the page user's industry
   const skills = industry ? await getIndustrySkills(industry.id) : [];
   const skillIds = skills.map((skill) => skill.id);
-  const skillNames = skills.map(skill => skill.name)
+  const skillNames = skills.map((skill) => skill.name);
 
   const { skillCounts: endorsements, endorsers } = await getEndorsementsSummary(
     pageUserId,
     skillIds as string[],
     skillNames as string[]
   );
+
+  const endorsementCount = endorsements.reduce((acc, curr) => {
+    if (curr.value > 0) {
+      acc++;
+    }
+    return acc;
+  }, 0);
 
   //current user endorsements
   let sessionUserEndorsements = [] as Endorsement[];
@@ -87,7 +94,7 @@ export default async function UserPage({ params }: { params: Params }) {
                 </div>
                 <div className="flex justify-center">
                   <div className="w-full max-w-md">
-                    {endorsements.length > 2 ? (
+                    {endorsementCount > 2 ? (
                       <RadarChartRounded data={endorsements} />
                     ) : (
                       <p className="text-gray-500 text-center">
