@@ -12,6 +12,7 @@ import { getEndorsementsSummary } from "@/actions/endorsements";
 import UserNotFound from "@/components/user-not-found";
 import EndorseContainer from "@/components/endorse-container";
 import { type Endorsement } from "@/actions/endorsements";
+import { texts } from "@/utils/constants";
 
 type Params = Promise<{ userId: string }>;
 
@@ -57,6 +58,16 @@ export default async function UserPage({ params }: { params: Params }) {
     .map((endorsement) => endorsement.skillId)
     .filter((skillId) => skillIds.includes(skillId));
 
+  const profileNotCompleteText =
+    sessionUserId === pageUserId
+      ? texts.profileNotComplete.user
+      : texts.profileNotComplete.visitor;
+
+  const notEnoughEndorsementsText =
+    sessionUserId === pageUserId
+      ? texts.notEnoughEndorsements.user
+      : texts.notEnoughEndorsements.visitor;
+
   if (user) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
@@ -99,8 +110,8 @@ export default async function UserPage({ params }: { params: Params }) {
                     ) : (
                       <p className="text-gray-500 text-center">
                         {!industry
-                          ? "Profile not complete yet, select an industry to get started"
-                          : "Not enough endorsements yet. Share your profile and get endorsed by your peers!"}
+                          ? profileNotCompleteText
+                          : notEnoughEndorsementsText}
                       </p>
                     )}
                   </div>
