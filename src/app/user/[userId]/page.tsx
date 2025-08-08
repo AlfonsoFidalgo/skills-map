@@ -77,7 +77,7 @@ export default async function UserPage({ params }: { params: Params }) {
               <div>
                 <Image
                   className="rounded-full shadow-lg border-4 border-white ring-2 ring-blue-100"
-                  src={user.image as string}
+                  src={user.image || "/default-avatar.svg"}
                   width={120}
                   height={120}
                   alt="user photo"
