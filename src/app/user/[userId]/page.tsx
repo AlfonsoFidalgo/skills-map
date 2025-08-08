@@ -38,13 +38,6 @@ export default async function UserPage({ params }: { params: Params }) {
     skillNames as string[]
   );
 
-  const endorsementCount = endorsements.reduce((acc, curr) => {
-    if (curr.value > 0) {
-      acc++;
-    }
-    return acc;
-  }, 0);
-
   //current user endorsements
   let sessionUserEndorsements = [] as Endorsement[];
   if (sessionUserId) {
@@ -105,7 +98,7 @@ export default async function UserPage({ params }: { params: Params }) {
                 </div>
                 <div className="flex justify-center">
                   <div className="w-full max-w-md">
-                    {endorsementCount > 2 ? (
+                    {endorsers > 0 ? (
                       <RadarChartRounded data={endorsements} />
                     ) : (
                       <p className="text-gray-500 text-center">

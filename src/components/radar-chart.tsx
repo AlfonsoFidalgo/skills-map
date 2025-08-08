@@ -53,7 +53,7 @@ export function RadarChartRounded({
           })}
 
           {/* Add labels to each circle */}
-          {/* {rawData.map((d, i) => (
+          {/* {data.map((d, i) => (
             <text
               key={`label-${i}`}
               x={rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2)}
@@ -68,8 +68,8 @@ export function RadarChartRounded({
           ))} */}
 
           {/* Draw axes */}
-          {/* {rawData.map((d, i) => {
-            if (i === 0) return null; // hide the first axis so it doesn't cover the labels
+          {data.map((d, i) => {
+            //if (i === 0) return null; // hide the first axis so it doesn't cover the labels
             return (
               <line
                 key={i}
@@ -80,7 +80,7 @@ export function RadarChartRounded({
                 className="stroke-gray-300 dark:stroke-zinc-800"
               />
             );
-          })} */}
+          })}
 
           {/* Draw the radar chart path */}
           <path
