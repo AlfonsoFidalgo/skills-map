@@ -31,7 +31,7 @@ export default function UserInfo({
       {!isEditing ? (
         <>
           <div className="flex flex-row items-center gap-4 w-full">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-tight">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 leading-tight">
               {name}
             </h2>
             {userId === session?.user?.id && (
@@ -48,19 +48,19 @@ export default function UserInfo({
             {title && (
               <div className="flex items-center gap-2">
                 <MdWork className="w-4 h-4 text-gray-500" />
-                <p className="text-lg font-medium text-gray-700">{title}</p>
+                <p className="text-lg md:text-xl text-gray-700">{title}</p>
               </div>
             )}
             {industry && (
               <div className="flex items-center gap-2">
                 <FaBuilding className="w-4 h-4 text-gray-500" />
-                <p className="text-lg text-gray-600">{industry}</p>
+                <p className="text-lg md:text-xl text-gray-700">{industry}</p>
               </div>
             )}
             {location && (
               <div className="flex items-center gap-2">
-                <FaLocationDot className="w-4 h-4 text-gray-500" />
-                <p className="text-sm text-gray-500 font-medium">{location}</p>
+                <FaLocationDot className="w-3 h-3 text-gray-500" />
+                <p className="text-sm md:text-md text-gray-500">{location}</p>
               </div>
             )}
           </div>
