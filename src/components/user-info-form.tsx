@@ -1,11 +1,11 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { MdWork } from "react-icons/md";
 import { FaBuilding } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { editUserInfo } from "@/actions/users";
-import React from "react";
+import DeleteProfile from "@/components/delete-profile";
 
 type UserInfoFormProps = {
   location?: string;
@@ -28,14 +28,14 @@ export default function UserInfoForm({
     response: null,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (formState.success) {
       setIsEditing(false);
     }
   }, [formState.success, setIsEditing]);
 
   return (
-    <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 mt-4 max-w-md">
+    <div className="w-full">
       <div className="mb-4">
         <h3 className="text-lg font-semibold text-gray-800 mb-1">
           Edit Profile Information
@@ -169,6 +169,12 @@ export default function UserInfoForm({
           </button>
         </div>
       </form>
+
+      <div className="my-6">
+        <hr className="border-gray-200" />
+      </div>
+
+      <DeleteProfile userId={userId} />
     </div>
   );
 }

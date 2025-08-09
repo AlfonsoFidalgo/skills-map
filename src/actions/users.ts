@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import prisma from "@/db";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
@@ -100,4 +101,40 @@ export async function editUserInfo(
     success: true,
     response: "User updated successfully",
   };
+}
+
+export interface DeleteUserFormState {
+  success: boolean | null;
+  error: string | null;
+  response: string | null;
+}
+
+export async function deleteUser(
+  prevState: DeleteUserFormState,
+  formData: FormData
+): Promise<DeleteUserFormState> {
+  const id = formData.get("userId") as string;
+  const session = await auth();
+  if (!session || !session.user?.id || session.user.id !== id) {
+    return {
+      error: "Unauthorized",
+      response: null,
+      success: false,
+    };
+  }
+  try {
+    await prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+    revalidatePath("/");
+  } catch (err: unknown) {
+    console.error("Error deleting user:", err);
+    return {
+      ...prevState,
+      error: "Error deleting your profile. Please try again later.",
+    };
+  }
+  redirect("/");
 }
