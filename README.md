@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Skills Map
+
+A simple web application that allows professionals to showcase their skills through peer endorsements. Users can select their industry of expertise (IT, Marketing, Sales...) which all have a fixed amount of skills. Users can then endorse up to two skill to their peers and visualise their expertise in a radar graph.
+
+
+## Features
+
+- **LinkedIn Authentication**: Sign in with your LinkedIn account for seamless profile integration
+- **Skill Endorsements**: Endorse colleagues and get endorsed for your skills
+- **Industry-Specific Skills**: Skills are organized by industry (Technology, Marketing & Advertising, etc.)
+- **Profile Management**: Edit your job title, industry, and location
+- **Visual Dashboard**: Chart to visualize your skills
+
+## Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/) with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Authentication**: NextAuth.js with LinkedIn provider
+- **Database**: SQLite with Prisma ORM
+- **Visualization**: D3.js for radar charts
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/AlfonsoFidalgo/skills-map.git
+cd skills-map
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up your environment variables:
+```bash
+touch .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Add your LinkedIn OAuth credentials and database URL to `.env.local`:
+```env
+NEXTAUTH_SECRET=your-secret-key
+LINKEDIN_CLIENT_ID=your-linkedin-client-id
+LINKEDIN_CLIENT_SECRET=your-linkedin-client-secret
+DATABASE_URL="file:./dev.db"
+```
 
-## Learn More
+4. Set up the database:
+```bash
+npx prisma migrate dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+5. Run the development server:
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Database Schema
 
-## Deploy on Vercel
+The application uses the following main models:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **User**: Stores user profile information from LinkedIn
+- **Industry**: Categories for different professional industries
+- **Skill**: Industry-specific skills that can be endorsed
+- **Endorsement**: Tracks who endorsed whom for which skill
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Available Scripts
+
+- `npm run dev` - Start development server with Turbopack
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+
+## Project Structure
+
+```
+src/
+├── app/                 # Next.js App Router pages
+├── components/          # Reusable React components
+├── actions/            # Server actions for data mutations
+├── auth.ts             # NextAuth.js configuration
+├── db/                 # Database connection
+├── types/              # TypeScript type definitions
+└── utils/              # Utility functions and constants
+
+prisma/
+├── schema.prisma       # Database schema
+├── migrations/         # Database migrations
+└── dev.db             # SQLite database file
+```
+
