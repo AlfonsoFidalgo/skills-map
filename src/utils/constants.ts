@@ -12,5 +12,15 @@ export const texts = {
   notEnoughEndorsements: {
     user: "Not enough endorsements yet. Share your profile and get endorsed by your peers!",
     visitor: "User doesn't have enough endorsements yet"
+  },
+  endorsers: {
+    title: "Endorsers",
+    user: "People who endorsed you",
+    visitor: "People who have endorsed this user",
+  },
+  profileViews: {
+    title: "Profile visits",
+    user: "Times your profile was viewed",
+    visitor: "Times this profile was viewed"
   }
 }
