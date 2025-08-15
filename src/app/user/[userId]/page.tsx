@@ -13,6 +13,7 @@ import UserNotFound from "@/components/user-not-found";
 import EndorseContainer from "@/components/endorse-container";
 import { type Endorsement } from "@/actions/endorsements";
 import { texts } from "@/utils/constants";
+import LinkedInShareButton from "@/components/UI/linkedin-share-button";
 
 type Params = Promise<{ userId: string }>;
 
@@ -84,6 +85,11 @@ export default async function UserPage({ params }: { params: Params }) {
                   title={user.title || ""}
                   industry={industry?.name}
                 />
+                {session?.user?.id === pageUserId && (
+                  <div className="flex justify-center md:justify-start mt-2">
+                    <LinkedInShareButton />
+                  </div>
+                )}
               </div>
             </div>
 
@@ -92,7 +98,7 @@ export default async function UserPage({ params }: { params: Params }) {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
               <div className="lg:col-span-2">
                 <div className="mb-6">
-                  <h3 className="text-3xl font-bold text-gray-800 mb-2 text-center">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2 text-center">
                     {user.firstName}&apos;s {industry?.name} skills
                   </h3>
                 </div>
