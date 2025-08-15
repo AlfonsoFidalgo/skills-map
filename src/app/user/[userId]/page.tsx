@@ -65,9 +65,9 @@ export default async function UserPage({ params }: { params: Params }) {
   if (user) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-        <div className="max-w-5xl mx-auto px-4 py-8">
+        <div className="max-w-2xl mx-auto px-4 py-8">
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
-            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start mb-8">
+            <div className="flex flex-col items-center space-y-6 mb-8">
               <div>
                 <Image
                   className="rounded-full shadow-lg border-4 border-white ring-2 ring-blue-100"
@@ -77,7 +77,7 @@ export default async function UserPage({ params }: { params: Params }) {
                   alt="user photo"
                 />
               </div>
-              <div className="flex-1 text-center md:text-left">
+              <div className="text-center max-w-2xl">
                 <UserInfo
                   userId={user.id}
                   name={user.name || ""}
@@ -86,7 +86,7 @@ export default async function UserPage({ params }: { params: Params }) {
                   industry={industry?.name}
                 />
                 {session?.user?.id === pageUserId && (
-                  <div className="flex justify-center md:justify-start mt-2">
+                  <div className="flex justify-center mt-2">
                     <LinkedInShareButton />
                   </div>
                 )}
@@ -121,7 +121,7 @@ export default async function UserPage({ params }: { params: Params }) {
               <StatsCardContainer endorsers={endorsers} />
 
               {/* Endorse Section */}
-              <div className="w-full max-w-2xl">
+              <div className="w-full max-w-md">
                 <EndorseContainer
                   pageUserId={pageUserId}
                   sessionUserId={sessionUserId}
