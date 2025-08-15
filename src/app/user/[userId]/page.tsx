@@ -95,15 +95,16 @@ export default async function UserPage({ params }: { params: Params }) {
 
             <div className="border-t border-gray-200 mb-8"></div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-              <div className="lg:col-span-2">
+            <div className="flex flex-col items-center space-y-8">
+              {/* Skills Chart Section */}
+              <div className="w-full max-w-2xl">
                 <div className="mb-6">
                   <h3 className="text-2xl font-bold text-gray-800 mb-2 text-center">
                     {user.firstName}&apos;s {industry?.name} skills
                   </h3>
                 </div>
                 <div className="flex justify-center">
-                  <div className="w-full max-w-md">
+                  <div className="w-full max-w-lg">
                     {endorsers > 0 ? (
                       <RadarChartRounded data={endorsements} />
                     ) : (
@@ -117,8 +118,10 @@ export default async function UserPage({ params }: { params: Params }) {
                 </div>
               </div>
 
-              <div className="lg:col-span-1">
-                <StatsCardContainer endorsers={endorsers} />
+              <StatsCardContainer endorsers={endorsers} />
+
+              {/* Endorse Section */}
+              <div className="w-full max-w-2xl">
                 <EndorseContainer
                   pageUserId={pageUserId}
                   sessionUserId={sessionUserId}
