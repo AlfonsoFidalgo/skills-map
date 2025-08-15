@@ -32,6 +32,11 @@ export default function EndorseContainer({
       <>
         <div className="border-t border-gray-200 mb-8"></div>
         <form action={signIn}>
+          <div className="flex justify-center mb-4">
+            <p className="text-gray-600 text-lg">
+              Please, sign in to endorse {userName}
+            </p>
+          </div>
           <LinkedInButton />
         </form>
       </>
@@ -46,7 +51,12 @@ export default function EndorseContainer({
     return (
       <>
         <div className="border-t border-gray-200 mb-8"></div>
-        <div className="flex justify-center">
+        <div className="flex flex-col justify-center">
+          <div className="flex justify-center mb-4">
+            <p className="text-gray-600 text-lg text-center">
+              Help {userName} by endorsing their skills now!
+            </p>
+          </div>
           <button
             onClick={() => setOpen(true)}
             className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-4 rounded-xl font-semibold shadow-lg hover:from-green-600 hover:to-emerald-700 hover:shadow-xl transition-all duration-200 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-300 text-lg"
