@@ -117,7 +117,7 @@ export default async function UserPage({ params }: { params: Params }) {
                   </div>
                 </div>
 
-                <StatsCardContainer endorsers={endorsers} />
+                {endorsers > 0 && <StatsCardContainer endorsers={endorsers} />}
 
                 {/* Share Profile Section */}
                 {session?.user?.id === pageUserId && (
