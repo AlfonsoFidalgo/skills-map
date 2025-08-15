@@ -20,10 +20,11 @@ export function RadarChartRounded({
   const radarLine = lineRadial<{ value: number }>()
     .radius((d) => rScale(d.value))
     .angle((d, i) => i * angleSlice)
-    .curve(curveCardinalClosed); // Ensure the path is closed
+    // .curve(curveCardinalClosed); // Ensure the path is closed
 
   // Generate the radar chart path
-  const radarPath = radarLine(data);
+  const closedData = [...data, data[0]];
+  const radarPath = radarLine(closedData);
 
   return (
     <div className="relative mt-10 mb-2">
@@ -90,16 +91,16 @@ export function RadarChartRounded({
           />
 
           {/* Draw circles for each data point */}
-          {/* {data.map((d, i) => (
+          {data.map((d, i) => (
             <React.Fragment key={i}>
               <circle
                 cx={rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2)}
                 cy={rScale(d.value) * Math.sin(angleSlice * i - Math.PI / 2)}
-                r={12}
+                r={2}
                 strokeWidth="1"
-                className="fill-gray-100/70 stroke-green-600"
+                className="fill-green-600/70 stroke-green-600"
               />
-              <text
+              {/* <text
                 x={rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2)}
                 y={rScale(d.value) * Math.sin(angleSlice * i - Math.PI / 2)}
                 dy="0.35em" // Center the text vertically
@@ -108,9 +109,9 @@ export function RadarChartRounded({
                 className="fill-gray-600 text-xs"
               >
                 {d.value}
-              </text>
+              </text> */}
             </React.Fragment>
-          ))} */}
+          ))}
 
           {/* Add labels for each axis */}
           {data.map((d, i) => {
