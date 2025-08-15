@@ -118,7 +118,7 @@ export default async function UserPage({ params }: { params: Params }) {
               </div>
 
               <div className="lg:col-span-1">
-                <StatsCardContainer endorsers={endorsers} profileViews={34} />
+                <StatsCardContainer endorsers={endorsers} />
                 <EndorseContainer
                   pageUserId={pageUserId}
                   sessionUserId={sessionUserId}
