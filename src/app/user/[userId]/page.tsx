@@ -103,7 +103,7 @@ export default async function UserPage({ params }: { params: Params }) {
                     </h3>
                   </div>
                   <div className="flex justify-center">
-                    <div className="w-full max-w-lg">
+                    <div className="w-11/12 max-w-lg">
                       {endorsers > 0 ? (
                         <RadarChartRounded data={endorsements} />
                       ) : (
