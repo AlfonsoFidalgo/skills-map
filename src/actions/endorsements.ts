@@ -38,7 +38,7 @@ export async function getEndorsementsSummary(
     );
 
     const skillMap = skillNames.reduce((acc, curr) => {
-      acc[curr] = 0.25; //Math.floor(Math.random() * 20);
+      acc[curr] = 0.5; //Math.floor(Math.random() * 20);
       return acc;
     }, {} as Record<string, number>);
 
