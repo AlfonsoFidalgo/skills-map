@@ -1,11 +1,11 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { MdWork } from "react-icons/md";
-import { FaBuilding } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { editUserInfo } from "@/actions/users";
 import DeleteProfile from "@/components/delete-profile";
+import IndustrySelectContainer from "@/components/industry-select-container";
 
 type UserInfoFormProps = {
   location?: string;
@@ -28,6 +28,10 @@ export default function UserInfoForm({
     response: null,
   });
 
+  const [selectedIndustry, setSelectedIndustry] = useState<
+    string | null | undefined
+  >(industry);
+
   useEffect(() => {
     if (formState.success) {
       setIsEditing(false);
@@ -45,6 +49,9 @@ export default function UserInfoForm({
       <form className="space-y-4" action={action}>
         {/* Hidden input to include userId in form submission */}
         {userId && <input type="hidden" name="userId" value={userId} />}
+        {selectedIndustry && (
+          <input type="hidden" name="industry" value={selectedIndustry} />
+        )}
 
         <div className="space-y-1">
           <label
@@ -69,49 +76,6 @@ export default function UserInfoForm({
 
         <div className="space-y-1">
           <label
-            htmlFor="industry"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Industry
-          </label>
-          <div className="relative">
-            <select
-              id="industry"
-              name="industry"
-              defaultValue={industry || ""}
-              className="w-full pl-10 pr-8 py-3 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm transition-all duration-200 hover:border-gray-300 appearance-none bg-white"
-            >
-              <option value="" disabled>
-                Select an industry
-              </option>
-              <option value="Tech">Tech</option>
-              <option value="Marketing">Marketing</option>
-              <option value="Product Management">Product Management</option>
-              <option value="Sales">Sales</option>
-            </select>
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FaBuilding className="h-4 w-4 text-gray-400" />
-            </div>
-            <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-              <svg
-                className="h-4 w-4 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-1">
-          <label
             htmlFor="location"
             className="block text-sm font-medium text-gray-700"
           >
@@ -128,6 +92,18 @@ export default function UserInfoForm({
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FaLocationDot className="h-4 w-4 text-gray-400" />
             </div>
+          </div>
+          <div className="space-y-1 mt-4">
+            <label
+              htmlFor="industry"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Industry
+            </label>
+            <IndustrySelectContainer
+              selectedIndustry={selectedIndustry}
+              setSelectedIndustry={setSelectedIndustry}
+            />
           </div>
         </div>
 

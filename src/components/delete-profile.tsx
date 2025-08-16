@@ -12,7 +12,7 @@ export default function DeleteProfile({ userId }: { userId?: string }) {
     error: null,
     response: null,
   });
-  console.log("DeleteProfile formState:", formState);
+
   return (
     <>
       <form className="flex flex-col gap-3 items-center" action={action}>

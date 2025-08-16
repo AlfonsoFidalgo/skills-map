@@ -78,12 +78,12 @@ export async function editUserInfo(
   const title = formData.get("title") as string;
   const location = formData.get("location") as string;
 
-  if (!title || !location) {
-    return {
-      ...prevState,
-      error: "Title and location are required",
-    };
-  }
+  // if (!title || !location) {
+  //   return {
+  //     ...prevState,
+  //     error: "Title and location are required",
+  //   };
+  // }
 
   const user = await editUser(id, { title, location, industryId });
 
