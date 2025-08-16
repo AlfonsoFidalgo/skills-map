@@ -14,8 +14,8 @@ export default function HomepageCTAs() {
           Build Your Profile
         </h3>
         <p className="text-gray-600">
-          Create an account with just a couple of clicks and select your
-          industry of expertise.
+          Create an account and select your industry of expertise, which will
+          come with a predefined set of skills.
         </p>
       </div>
 

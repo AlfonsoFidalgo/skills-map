@@ -51,11 +51,11 @@ export default async function Home() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            Why Choose Skills Map?
+            How It Works
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Join thousands of professionals building their digital reputation
-            through skill endorsements.
+            Showcase the most relevant skills based on your industry, get endorsed by
+            peers, and visualize your expertise with interactive skill maps.
           </p>
         </div>
 
