@@ -109,7 +109,7 @@ model Endorsement {
 
 model Skill {
   id           String        @id @default(uuid())
-  name         String        @unique
+  name         String
   description  String?
   industryId   String
   industry     Industry      @relation(fields: [industryId], references: [id], onDelete: Cascade)
