@@ -11,7 +11,7 @@ export const texts = {
     visitor: "User hasn't completed their profile yet",
   },
   notEnoughEndorsements: {
-    user: "Not enough endorsements yet. Share your profile and get endorsed by your peers!",
+    user: "You don't have enough endorsements yet. Share your profile and start getting endorsed by your peers!",
     visitor: "User doesn't have enough endorsements yet",
   },
   endorsers: {

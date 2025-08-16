@@ -22,7 +22,7 @@ export default function UserInfoForm({
   title,
   setIsEditing,
 }: UserInfoFormProps) {
-  const [formState, action] = useActionState(editUserInfo, {
+  const [formState, action, isPending] = useActionState(editUserInfo, {
     success: null,
     error: null,
     response: null,
@@ -158,9 +158,14 @@ export default function UserInfoForm({
         <div className="flex gap-3 pt-2">
           <button
             type="submit"
-            className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-medium rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-sm"
+            disabled={isPending}
+            className={`flex-1 px-4 py-3 text-sm font-medium rounded-lg focus:outline-none transition-all duration-200 shadow-sm ${
+              isPending
+                ? "bg-blue-300 text-blue-100 cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            }`}
           >
-            Save Changes
+            {isPending ? "Saving..." : "Save Changes"}
           </button>
           <button
             type="button"
