@@ -14,6 +14,7 @@ import EndorseContainer from "@/components/endorse-container";
 import { type Endorsement } from "@/actions/endorsements";
 import { texts } from "@/utils/constants";
 import LinkedInShareButton from "@/components/UI/linkedin-share-button";
+import CopyUrlButton from "@/components/UI/copy-url-button";
 
 type Params = Promise<{ userId: string }>;
 
@@ -131,8 +132,9 @@ export default async function UserPage({ params }: { params: Params }) {
                         endorsements!
                       </p>
                     </div>
-                    <div className="flex justify-center">
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
                       <LinkedInShareButton />
+                      <CopyUrlButton />
                     </div>
                   </div>
                 )}

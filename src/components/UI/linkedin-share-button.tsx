@@ -24,7 +24,7 @@ export default function LinkedInShareButton({
   return (
     <button
       onClick={handleShare}
-      className="inline-flex items-center gap-2 bg-[#0077B5] hover:bg-[#005885] text-white px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-200 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0077B5] focus:ring-offset-2"
+      className="inline-flex items-center justify-center gap-2 bg-[#0077B5] hover:bg-[#005885] text-white px-3 py-2 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-200 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0077B5] focus:ring-offset-2 min-w-[130px] max-w-[130px]"
     >
       <FaLinkedin className="w-4 h-4" />
       <FaShare className="w-3 h-3" />
