@@ -84,8 +84,10 @@ export default function UserInfoForm({
               <option value="" disabled>
                 Select an industry
               </option>
-              <option value="tech">Technology</option>
-              <option value="marketing">Marketing & Advertising</option>
+              <option value="Tech">Tech</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Product Management">Product Management</option>
+              <option value="Sales">Sales</option>
             </select>
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FaBuilding className="h-4 w-4 text-gray-400" />
