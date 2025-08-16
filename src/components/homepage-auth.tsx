@@ -35,7 +35,6 @@ export default function HomepageAuth({ session }: HomepageAuthProps) {
           <h3 className="text-xl font-bold text-gray-800 mb-2">
             Welcome back!
           </h3>
-          <p className="text-gray-600">Ready to showcase your skills?</p>
         </div>
 
         <button
@@ -61,8 +60,7 @@ export default function HomepageAuth({ session }: HomepageAuthProps) {
         <div className="text-center mb-6">
           <h3 className="text-xl font-bold text-gray-800 mb-2">Get Started</h3>
           <p className="text-gray-600">
-            Sign in to create your skills profile and connect with
-            professionals.
+            Create an account in just a few clicks to get started
           </p>
         </div>
 
