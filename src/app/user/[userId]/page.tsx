@@ -125,11 +125,11 @@ export default async function UserPage({ params }: { params: Params }) {
                   <div className="w-full max-w-md text-center space-y-4 pt-4 border-t border-gray-200">
                     <div className="space-y-2">
                       <h4 className="text-lg font-semibold text-gray-800">
-                        Share Your Skills
+                        Share Your Profile
                       </h4>
                       <p className="text-gray-600 text-sm">
-                        Let your network know about your expertise and get more
-                        endorsements!
+                        Share your profile with your network to get more
+                        endorsements.
                       </p>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
