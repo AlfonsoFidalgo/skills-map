@@ -19,8 +19,8 @@ export function RadarChartRounded({
   // Create the radar line
   const radarLine = lineRadial<{ value: number }>()
     .radius((d) => rScale(d.value))
-    .angle((d, i) => i * angleSlice)
-    // .curve(curveCardinalClosed); // Ensure the path is closed
+    .angle((d, i) => i * angleSlice);
+  // .curve(curveCardinalClosed); // Ensure the path is closed
 
   // Generate the radar chart path
   const closedData = [...data, data[0]];
@@ -78,7 +78,7 @@ export function RadarChartRounded({
                 y1={0}
                 x2={rScale(maxValue) * Math.cos(angleSlice * i - Math.PI / 2)}
                 y2={rScale(maxValue) * Math.sin(angleSlice * i - Math.PI / 2)}
-                className="stroke-gray-300 dark:stroke-zinc-800"
+                className="stroke-gray-300"
               />
             );
           })}
