@@ -34,7 +34,7 @@ export default function EndorseContainer({
         <form action={signIn}>
           <div className="flex justify-center mb-4">
             <p className="text-gray-600 text-lg">
-              Please, sign in to endorse {userName}
+              Sign in to endorse {userName}
             </p>
           </div>
           <LinkedInButton />
