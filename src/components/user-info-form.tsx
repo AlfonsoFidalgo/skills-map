@@ -47,7 +47,6 @@ export default function UserInfoForm({
       </div>
 
       <form className="space-y-4" action={action}>
-        {/* Hidden input to include userId in form submission */}
         {userId && <input type="hidden" name="userId" value={userId} />}
         {selectedIndustry && (
           <input type="hidden" name="industry" value={selectedIndustry} />

@@ -20,24 +20,7 @@ export default function IndustrySelectContainer({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl">
         {Object.keys(INDUSTRIES).map((industry) => {
           const key = INDUSTRIES[industry as keyof typeof INDUSTRIES];
-          let icon = null;
-
-          switch (industry) {
-            case "Tech":
-              icon = <FaLaptopCode className="h-5 w-5" />;
-              break;
-            case "Sales":
-              icon = <FaHandshake className="h-5 w-5" />;
-              break;
-            case "Product Management":
-              icon = <FaGears className="h-5 w-5" />;
-              break;
-            case "Marketing":
-              icon = <BiPurchaseTagAlt className="h-5 w-5" />;
-              break;
-            default:
-              icon = <FaLaptopCode className="h-5 w-5" />;
-          }
+          const icon = getIcon(industry);
 
           return (
             <IndustryCard
@@ -52,4 +35,19 @@ export default function IndustrySelectContainer({
       </div>
     </div>
   );
+}
+
+function getIcon(industry: string) {
+  switch (industry) {
+    case "Tech":
+      return <FaLaptopCode className="h-5 w-5" />;
+    case "Sales":
+      return <FaHandshake className="h-5 w-5" />;
+    case "Product Management":
+      return <FaGears className="h-5 w-5" />;
+    case "Marketing":
+      return <BiPurchaseTagAlt className="h-5 w-5" />;
+    default:
+      return <FaLaptopCode className="h-5 w-5" />;
+  }
 }
