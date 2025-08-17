@@ -40,7 +40,7 @@ export default async function UserLayout({
               <span className="font-bold text-lg">Skills Map</span>
             </Link>
 
-            {currentUserId !== pageUserId && (
+            {currentUserId !== pageUserId && currentUserId && (
               <Link
                 href={`/user/${currentUserId}`}
                 className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors"
