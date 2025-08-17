@@ -1,5 +1,6 @@
 import { DialogTitle } from "@headlessui/react";
 import { Skill } from "@/actions/skills";
+import { MAX_ENDORSEMENTS } from "@/utils/constants";
 
 type EndorseModalContentProps = {
   userName: string | null;
@@ -26,7 +27,7 @@ export default function EndorseModalContent({
       </DialogTitle>
       <div className="mt-2">
         <p className="text-sm text-gray-500">
-          {`You can endorse ${userName} on up to two of the following skills:`}
+          {`You can endorse ${userName} on up to ${MAX_ENDORSEMENTS} of these skills`}
         </p>
         <div className="mt-4 space-y-2">
           {skills.map((skill) => (
@@ -35,12 +36,12 @@ export default function EndorseModalContent({
               onClick={() => toggleSkill(skill.id!)}
               disabled={
                 !selectedSkills.includes(skill.id!) &&
-                selectedSkills.length >= 2
+                selectedSkills.length >= MAX_ENDORSEMENTS
               }
               className={`w-full text-left px-3 py-2 rounded-md border transition-colors ${
                 selectedSkills.includes(skill.id!)
                   ? "bg-green-50 border-green-300 text-green-800"
-                  : selectedSkills.length >= 2
+                  : selectedSkills.length >= MAX_ENDORSEMENTS
                   ? "bg-gray-50 border-gray-200 text-gray-400 cursor-not-allowed"
                   : "bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
               }`}

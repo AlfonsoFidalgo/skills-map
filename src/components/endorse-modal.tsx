@@ -11,6 +11,7 @@ import { FaHandshake } from "react-icons/fa";
 import { type Skill } from "@/actions/skills";
 import { createEndorsement } from "@/actions/endorsements";
 import EndorseModalContent from "@/components/endorse-modal-content";
+import { MAX_ENDORSEMENTS } from "@/utils/constants";
 
 type EndorseModalProps = {
   open: boolean;
@@ -58,7 +59,7 @@ export default function EndorseModal({
     setSelectedSkills((prev) => {
       if (prev.includes(skill)) {
         return prev.filter((s) => s !== skill);
-      } else if (prev.length < 2) {
+      } else if (prev.length < MAX_ENDORSEMENTS) {
         return [...prev, skill];
       }
       return prev;

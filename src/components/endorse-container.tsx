@@ -23,7 +23,6 @@ export default function EndorseContainer({
   industrySelected,
   endorsedSkillsIds,
 }: EndorseButtonProps) {
-  //   const session = useSession();
   const [open, setOpen] = React.useState(false);
 
   //user not logged in

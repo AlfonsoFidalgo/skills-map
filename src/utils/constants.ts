@@ -25,3 +25,5 @@ export const texts = {
     visitor: "Times this profile was viewed",
   },
 };
+
+export const MAX_ENDORSEMENTS = 3;

@@ -51,7 +51,7 @@ export async function getEndorsementsSummary(
     for (const k in skillMap) {
       skillMapTransformed.push({ topic: k, value: skillMap[k] });
     }
-    
+
     return {
       skillCounts: skillMapTransformed,
       endorsers: uniqueEndorserCount.size,
@@ -121,10 +121,9 @@ export async function createEndorsement({
   skillsList,
 }: EndorsementData): Promise<CreateEndorsementActionState | null> {
   if (endorseeId === endorserId) {
-    console.error("Endorser and endorsee cannot be the same.");
     return {
       success: false,
-      message: "You cannot endorse yourself.",
+      message: "You can't endorse yourself.",
     };
   }
   try {
