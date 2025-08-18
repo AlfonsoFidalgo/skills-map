@@ -33,8 +33,8 @@ export default function HomepageCTAs() {
 
       {/* Feature 3 */}
       <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-        <div className="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-6">
-          <FaLightbulb className="w-8 h-8 text-purple-600" />
+        <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-6">
+          <FaLightbulb className="w-8 h-8 text-blue-600" />
         </div>
         <h3 className="text-xl font-bold text-gray-800 mb-3">
           Understand your skills

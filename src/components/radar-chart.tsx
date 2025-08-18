@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { curveCardinalClosed, lineRadial, scaleLinear } from "d3";
+import { lineRadial, scaleLinear } from "d3";
 
 export function RadarChartRounded({
   data,
@@ -35,7 +35,6 @@ export function RadarChartRounded({
         <g transform={`translate(${radius}, ${radius})`}>
           {/* Draw concentric circles */}
           {[...Array(5)].map((_, i) => {
-            const circleRadius = (radius / 5) * (i + 1);
             return (
               <React.Fragment key={i}>
                 <circle
@@ -87,7 +86,7 @@ export function RadarChartRounded({
           <path
             d={radarPath ?? ""}
             strokeWidth="1"
-            className="fill-green-200/20 border-green-600 stroke-green-600"
+            className="fill-blue-300/20 border-blue-600 stroke-blue-600"
           />
 
           {/* Draw circles for each data point */}
@@ -97,8 +96,8 @@ export function RadarChartRounded({
                 cx={rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2)}
                 cy={rScale(d.value) * Math.sin(angleSlice * i - Math.PI / 2)}
                 r={2}
-                strokeWidth="1"
-                className="fill-green-600/70 stroke-green-600"
+                strokeWidth="2"
+                className="fill-blue-600/70 stroke-blue-600"
               />
               {/* <text
                 x={rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2)}
