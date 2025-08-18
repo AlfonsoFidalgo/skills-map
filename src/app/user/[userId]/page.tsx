@@ -15,6 +15,7 @@ import { type Endorsement } from "@/actions/endorsements";
 import { texts } from "@/utils/constants";
 import LinkedInShareButton from "@/components/UI/linkedin-share-button";
 import CopyUrlButton from "@/components/UI/copy-url-button";
+import ToggleModalButton from "@/components/toggle-modal-button";
 
 type Params = Promise<{ userId: string }>;
 
@@ -107,11 +108,14 @@ export default async function UserPage({ params }: { params: Params }) {
                     {endorsers > 0 ? (
                       <RadarChartRounded data={endorsements} />
                     ) : (
-                      <p className="text-gray-500 text-center">
-                        {!industry
-                          ? profileNotCompleteText
-                          : notEnoughEndorsementsText}
-                      </p>
+                      <div className="text-center space-y-4">
+                        <p className="text-gray-500">
+                          {!industry
+                            ? profileNotCompleteText
+                            : notEnoughEndorsementsText}
+                        </p>
+                        <ToggleModalButton />
+                      </div>
                     )}
                   </div>
                 </div>

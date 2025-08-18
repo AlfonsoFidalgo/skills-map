@@ -7,6 +7,7 @@ import { MdWork } from "react-icons/md";
 import { FaBuilding } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import EditProfileModal from "@/components/edit-profile-modal";
+import { useOpenModal } from "@/contexts/open-modal-context";
 
 type UserInfoProps = {
   userId?: string;
@@ -24,7 +25,8 @@ export default function UserInfo({
   title,
 }: UserInfoProps) {
   const { data: session } = useSession();
-  const [isEditing, setIsEditing] = React.useState(false);
+  // const [isEditing, setIsEditing] = React.useState(false);
+  const { isModalOpen, setIsModalOpen } = useOpenModal();
 
   return (
     <div className="flex flex-col justify-center items-start gap-3 w-full">
@@ -34,7 +36,7 @@ export default function UserInfo({
         </h2>
         {userId === session?.user?.id && (
           <button
-            onClick={() => setIsEditing(!isEditing)}
+            onClick={() => setIsModalOpen(!isModalOpen)}
             className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 flex-shrink-0"
             aria-label="Edit profile information"
           >
@@ -64,8 +66,8 @@ export default function UserInfo({
       </div>
 
       <EditProfileModal
-        open={isEditing}
-        setOpen={setIsEditing}
+        open={isModalOpen}
+        setOpen={setIsModalOpen}
         userId={userId}
         title={title}
         location={location}

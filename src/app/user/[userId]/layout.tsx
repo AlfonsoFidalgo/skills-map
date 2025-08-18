@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FaRegUser } from "react-icons/fa";
 import { auth } from "@/auth";
+import { OpenModalProvider } from "@/contexts/open-modal-context";
 
 type Params = Promise<{ userId: string }>;
 
@@ -53,7 +54,9 @@ export default async function UserLayout({
         </div>
       </nav>
 
-      <div className="max-w-4xl mx-auto px-4 py-8">{children}</div>
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <OpenModalProvider>{children}</OpenModalProvider>
+      </div>
     </div>
   );
 }
