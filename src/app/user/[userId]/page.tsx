@@ -114,7 +114,7 @@ export default async function UserPage({ params }: { params: Params }) {
                             ? profileNotCompleteText
                             : notEnoughEndorsementsText}
                         </p>
-                        {!industry && <ToggleModalButton />}
+                        {!industry && pageUserId === sessionUserId && <ToggleModalButton />}
                       </div>
                     )}
                   </div>
