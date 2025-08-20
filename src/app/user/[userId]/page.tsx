@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { type Metadata } from "next";
 
 import { auth } from "@/auth";
 import { getUser } from "@/actions/users";
@@ -18,6 +19,29 @@ import CopyUrlButton from "@/components/UI/copy-url-button";
 import ToggleModalButton from "@/components/toggle-modal-button";
 
 type Params = Promise<{ userId: string }>;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { userId } = await params;
+  const user = await getUser(userId);
+
+  if (!user) {
+    return {
+      title: "User Not Found - Skills Map",
+      description: "The requested user profile could not be found.",
+    };
+  }
+
+  const userTitle = user.title ? ` - ${user.title}` : "";
+
+  return {
+    title: `${user.name || user.firstName}${userTitle} - Skills Map`,
+    description: `View ${user.firstName}'s professional skills and endorsements on Skills Map.`,
+  };
+}
 
 export default async function UserPage({ params }: { params: Params }) {
   const { userId: pageUserId } = await params;
@@ -114,7 +138,9 @@ export default async function UserPage({ params }: { params: Params }) {
                             ? profileNotCompleteText
                             : notEnoughEndorsementsText}
                         </p>
-                        {!industry && pageUserId === sessionUserId && <ToggleModalButton />}
+                        {!industry && pageUserId === sessionUserId && (
+                          <ToggleModalButton />
+                        )}
                       </div>
                     )}
                   </div>

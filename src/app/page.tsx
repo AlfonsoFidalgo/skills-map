@@ -1,7 +1,14 @@
+import { type Metadata } from "next";
 import { auth } from "@/auth";
 import HomepageAuth from "@/components/homepage-auth";
 import HomepageCTAs from "@/components/homepage-ctas";
 import { type Session } from "@/types/session";
+
+export const metadata: Metadata = {
+  title: "Skills Map - Professional Skills Mapping & Endorsements",
+  description:
+    "Get endorsed for your skills and showcase your expertise. Understand your strengths and areas of growth with interactive skill maps.",
+};
 
 export default async function Home() {
   const session = await auth();
@@ -54,8 +61,9 @@ export default async function Home() {
             How It Works
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Showcase the most relevant skills based on your industry, get endorsed by
-            peers, and visualize your expertise with interactive skill maps.
+            Showcase the most relevant skills based on your industry, get
+            endorsed by peers, and visualize your expertise with interactive
+            skill maps.
           </p>
         </div>
 
